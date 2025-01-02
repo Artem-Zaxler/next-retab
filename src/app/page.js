@@ -29,7 +29,7 @@ export default function Home() {
     const [selectedFilter, setSelectedFilter] = useState(null);
     const [scheduleData, setScheduleData] = useState(null);
     const [isAnimating, setIsAnimating] = useState(true);
-    const [pagePaddingTop, setPagePaddingTop] = useState(350);
+    const [pagePaddingTop, setPagePaddingTop] = useState(50);
 
     useEffect(() => {
         const savedFilter = localStorage.getItem('selectedScheduleFilter');
@@ -39,9 +39,9 @@ export default function Home() {
             setIndex(parseInt(savedFilter, 10));
             setIsAnimating(false);
 
-            setPagePaddingTop(200);
+            setPagePaddingTop(50);
         } else {
-            setPagePaddingTop(350);
+            setPagePaddingTop(200);
         }
     }, []);
 
