@@ -11,7 +11,7 @@ const backgrounds = [
     '/images/stage-backgrounds/subject-1.png',
 ];
 
-const stages = [
+const filters = [
     { text: 'По группам', content: 'Расписание для групп' },
     { text: 'По преподавателям', content: 'Расписание для преподавателей' },
     { text: 'По кабинетам', content: 'Расписание по кабинетам' },
@@ -32,7 +32,7 @@ export default function Home() {
     const [pagePaddingTop, setPagePaddingTop] = useState(350);
 
     useEffect(() => {
-        const savedFilter = localStorage.getItem('selectedFilter');
+        const savedFilter = localStorage.getItem('selectedScheduleFilter');
         if (savedFilter !== null) {
             setSelectedFilter(parseInt(savedFilter, 10));
             setActiveStage(parseInt(savedFilter, 10));
@@ -49,7 +49,7 @@ export default function Home() {
         if (isAnimating) {
             const timer = setTimeout(() => {
                 setIndex((prevIndex) => (prevIndex + 1) % backgrounds.length);
-                setActiveStage((prevStage) => (prevStage + 1) % stages.length);
+                setActiveStage((prevStage) => (prevStage + 1) % filters.length);
             }, 5000);
 
             return () => clearTimeout(timer);
@@ -84,7 +84,7 @@ export default function Home() {
         setIndex(stageIndex);
         setSelectedFilter(stageIndex);
         setIsAnimating(false);
-        localStorage.setItem('selectedFilter', stageIndex);
+        localStorage.setItem('selectedScheduleFilter', stageIndex);
     };
 
     const getButtonClassName = (i) => {
@@ -105,7 +105,7 @@ export default function Home() {
             <h1 className={styles.home__title}>Расписание</h1>
 
             <div className={styles.home__filterButtons}>
-                {stages.map((stage, i) => (
+                {filters.map((stage, i) => (
                     <button
                         key={i}
                         className={`${styles.home__filterButton} ${getButtonClassName(i)}`}
