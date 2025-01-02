@@ -71,6 +71,11 @@
     grid-template-rows: 1fr 1fr 1fr;
     margin-top: 20px;
     font-size: 20px;
+
+    &_hasSchedule {
+      background: gray;
+      border-radius: 20px;
+    }
   }
 }
 

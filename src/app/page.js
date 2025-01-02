@@ -5,10 +5,10 @@ import styles from './page.module.scss';
 import Schedule from './components/Schedule/Schedule';
 
 const backgrounds = [
-    '/stage-backgrounds/groups-2.png',
-    '/stage-backgrounds/academic-stuff-2.png',
-    '/stage-backgrounds/cabinets-4.png',
-    '/stage-backgrounds/subject-1.png',
+    '/images/stage-backgrounds/groups-2.png',
+    '/images/stage-backgrounds/academic-stuff-2.png',
+    '/images/stage-backgrounds/cabinets-4.png',
+    '/images/stage-backgrounds/subject-1.png',
 ];
 
 const stages = [
@@ -116,7 +116,7 @@ export default function Home() {
                 ))}
             </div>
 
-            <div className={styles.home__content}>
+            <div className={`${styles.home__content} ${scheduleData ? styles.home__content_hasSchedule : ""}`}>
                 {scheduleData ? (
                     <Schedule schedule={scheduleData} />
                 ) : (

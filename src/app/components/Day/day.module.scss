@@ -1,0 +1,25 @@
+.day {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &__panel {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+    padding: 20px 40px;
+    color: white;
+    width: 10vw;
+  }
+
+  &__title {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  &__arrow {
+    max-width: 32px;
+    max-height: 32px;
+  }
+}

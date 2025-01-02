@@ -8,7 +8,7 @@ export default function Header() {
                 <div className={styles.header}>
                     <img
                         className={styles.header__logo}
-                        src={'/kgeu-logo.png'}
+                        src={'/images/kgeu-logo.png'}
                         alt={'kgeu-logo'}
                     />
 
