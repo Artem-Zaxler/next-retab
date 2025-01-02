@@ -47,7 +47,7 @@
     &_active {
       background: white;
 
-      &::before {
+      &_animated::before {
         content: '';
         position: absolute;
         top: 0;

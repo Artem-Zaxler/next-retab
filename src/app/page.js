@@ -18,7 +18,7 @@ const stages = [
     { text: 'По предмету', content: 'Расписание по предмету' },
 ];
 
-async function fetchData (filename) {
+async function fetchData(filename) {
     const data = await import(`./content/${filename}.json`);
     return data.default;
 }
@@ -28,15 +28,28 @@ export default function Home() {
     const [activeStage, setActiveStage] = useState(0);
     const [selectedFilter, setSelectedFilter] = useState(null);
     const [scheduleData, setScheduleData] = useState(null);
+    const [isAnimating, setIsAnimating] = useState(true);
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setIndex((prevIndex) => (prevIndex + 1) % backgrounds.length);
-            setActiveStage((prevStage) => (prevStage + 1) % stages.length);
-        }, 5000);
+        const savedFilter = localStorage.getItem('selectedFilter');
+        if (savedFilter !== null) {
+            setSelectedFilter(parseInt(savedFilter, 10));
+            setActiveStage(parseInt(savedFilter, 10));
+            setIndex(parseInt(savedFilter, 10));
+            setIsAnimating(false);
+        }
+    }, []);
 
-        return () => clearTimeout(timer);
-    }, [index, activeStage]);
+    useEffect(() => {
+        if (isAnimating) {
+            const timer = setTimeout(() => {
+                setIndex((prevIndex) => (prevIndex + 1) % backgrounds.length);
+                setActiveStage((prevStage) => (prevStage + 1) % stages.length);
+            }, 5000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [index, activeStage, isAnimating]);
 
     useEffect(() => {
         const loadScheduleData = async () => {
@@ -65,6 +78,15 @@ export default function Home() {
         setActiveStage(stageIndex);
         setIndex(stageIndex);
         setSelectedFilter(stageIndex);
+        setIsAnimating(false);
+        localStorage.setItem('selectedFilter', stageIndex);
+    };
+
+    const getButtonClassName = (i) => {
+        if (activeStage === i) {
+            return isAnimating ? styles.home__filterButton_active_animated : styles.home__filterButton_active;
+        }
+        return styles.home__filterButton_inactive;
     };
 
     return (
@@ -81,12 +103,7 @@ export default function Home() {
                 {stages.map((stage, i) => (
                     <button
                         key={i}
-                        className={`
-                            ${styles.home__filterButton}
-                            ${activeStage === i ?
-                            styles.home__filterButton_active :
-                            styles.home__filterButton_inactive}
-                        `}
+                        className={`${styles.home__filterButton} ${getButtonClassName(i)}`}
                         onClick={() => handleButtonClick(i)}
                     >
                         {stage.text}
