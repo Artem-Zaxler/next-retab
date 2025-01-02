@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react';
 import styles from './page.module.scss';
 
 const backgrounds = [
-    'url("/stage-backgrounds/groups-1.png")',
-    'url("/stage-backgrounds/academic-stuff-1.png")',
-    'url("/stage-backgrounds/cabinets-1.png")',
-    'url("/stage-backgrounds/subject-1.png")',
+    '/stage-backgrounds/groups-1.png',
+    '/stage-backgrounds/academic-stuff-1.png',
+    '/stage-backgrounds/cabinets-1.png',
+    '/stage-backgrounds/subject-1.png',
 ];
 
 const stages = [
@@ -38,8 +38,13 @@ export default function Home() {
     return (
         <div
             className={styles.home}
-            style={{ backgroundImage: backgrounds[index], backgroundSize: 'cover' }}
         >
+            <img
+                src={backgrounds[index]}
+                alt={'background-image'}
+                className={styles.home__background}
+            />
+
             <h1>Расписание</h1>
             <div className={styles.buttons}>
                 {stages.map((stage, i) => (
