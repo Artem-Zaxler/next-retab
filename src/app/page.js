@@ -4,17 +4,17 @@ import { useEffect, useState } from 'react';
 import styles from './page.module.scss';
 
 const backgrounds = [
-    'url(/background1.jpg)',
-    'url(/background2.jpg)',
-    'url(/background3.jpg)',
-    'url(/background4.jpg)',
+    'url("/stage-backgrounds/groups-1.png")',
+    'url("/stage-backgrounds/academic-stuff-1.png")',
+    'url("/stage-backgrounds/cabinets-1.png")',
+    'url("/stage-backgrounds/subject-1.png")',
 ];
 
 const stages = [
-    { text: 'Stage 1 Text', content: 'Content for Stage 1' },
-    { text: 'Stage 2 Text', content: 'Content for Stage 2' },
-    { text: 'Stage 3 Text', content: 'Content for Stage 3' },
-    { text: 'Stage 4 Text', content: 'Content for Stage 4' },
+    { text: 'По группам', content: 'Расписание для групп' },
+    { text: 'По преподавателям', content: 'Расписание для преподавателей' },
+    { text: 'По кабинетам', content: 'Расписание по кабинетам' },
+    { text: 'По предмету', content: 'Расписание по предмету' },
 ];
 
 export default function Home() {
