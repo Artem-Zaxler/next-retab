@@ -5,8 +5,8 @@ import styles from './page.module.scss';
 
 const backgrounds = [
     '/stage-backgrounds/groups-2.png',
-    '/stage-backgrounds/academic-stuff-1.png',
-    '/stage-backgrounds/cabinets-1.png',
+    '/stage-backgrounds/academic-stuff-2.png',
+    '/stage-backgrounds/cabinets-4.png',
     '/stage-backgrounds/subject-1.png',
 ];
 
