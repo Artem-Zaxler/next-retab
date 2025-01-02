@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import styles from './page.module.scss';
 
 const backgrounds = [
@@ -11,10 +11,10 @@ const backgrounds = [
 ];
 
 const stages = [
-    { text: 'По группам', content: 'Расписание для групп' },
-    { text: 'По преподавателям', content: 'Расписание для преподавателей' },
-    { text: 'По кабинетам', content: 'Расписание по кабинетам' },
-    { text: 'По предмету', content: 'Расписание по предмету' },
+    {text: 'По группам', content: 'Расписание для групп'},
+    {text: 'По преподавателям', content: 'Расписание для преподавателей'},
+    {text: 'По кабинетам', content: 'Расписание по кабинетам'},
+    {text: 'По предмету', content: 'Расписание по предмету'},
 ];
 
 export default function Home() {
@@ -46,18 +46,23 @@ export default function Home() {
             />
 
             <h1>Расписание</h1>
-            <div className={styles.buttons}>
+            <div className={styles.home__filterButtons}>
                 {stages.map((stage, i) => (
                     <button
                         key={i}
-                        className={`${styles.button} ${activeStage === i ? styles.active : styles.inactive}`}
+                        className={`
+                            ${styles.home__filterButton} 
+                            ${activeStage === i ?
+                                styles.home__filterButton_active : 
+                                styles.home__filterButton_inactive}
+                        `}
                         onClick={() => handleButtonClick(i)}
                     >
                         {stage.text}
                     </button>
                 ))}
             </div>
-            <div className={styles.content}>
+            <div className={styles.home__content}>
                 {stages[activeStage].content}
             </div>
         </div>

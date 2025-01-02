@@ -16,51 +16,60 @@
     z-index: -1;
     width: 100%;
   }
-}
 
-.buttons {
-  display: flex;
-  gap: 10px;
-}
+  &__filterButtons {
+    display: flex;
+    gap: 10px;
+  }
 
-.button {
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
+  &__filterButton {
+    padding: 10px 20px;
+    border: solid #c2c2c2 0.5px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    color: black;
+    z-index: 0;
+    font-family: 'Onest', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 17px;
 
-.active {
-  background: white;
-}
+    &_active {
+      background: white;
 
-.active::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background: blue;
-  animation: loading 5s linear forwards;
-}
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background: #dce7ff;
+        z-index: -1;
+        animation: loading 5s linear forwards;
+      }
+    }
 
-.inactive {
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(10px);
-}
+    &_inactive {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(8px);
+    }
+  }
 
-.content {
-  margin-top: 20px;
-  font-size: 1.2em;
+  &__content {
+    margin-top: 20px;
+    font-size: 1.2em;
+  }
 }
 
 @keyframes loading {
   0% {
     width: 0;
   }
+
   100% {
     width: 100%;
   }
