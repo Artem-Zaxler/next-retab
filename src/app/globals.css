@@ -1,2 +1,14 @@
 @import './assets/fonts/Roboto/roboto.css';
 @import './assets/fonts/Onest/onest.css';
+
+/* скрываем к чертям собачим вертикальный скроллбар */
+*{
+    -ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+
+h1 {
+    margin: 0;
+}
