@@ -2,4 +2,8 @@
   display: flex;
   flex-direction: column;
   padding: 10px 100px;
+
+  &_mainPage {
+    min-height: 100vh;
+  }
 }

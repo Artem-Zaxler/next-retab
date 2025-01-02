@@ -9,7 +9,7 @@ export default function RootLayout({children}) {
         <body>
         <Header/>
         <main>
-            <div className={styles.container}>
+            <div className={`${styles.container} ${styles.container_mainPage}`}>
                 {children}
             </div>
         </main>
