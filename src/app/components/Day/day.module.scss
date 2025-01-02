@@ -10,7 +10,7 @@
     align-items: center;
     padding: 20px 40px;
     color: white;
-    width: 10vw;
+    width: 20vw;
     cursor: pointer;
   }
 
@@ -22,5 +22,12 @@
   &__arrow {
     max-width: 32px;
     max-height: 32px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px;
   }
 }

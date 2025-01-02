@@ -23,7 +23,7 @@ export default function Day ({ day, subjects }) {
             </div>
 
             {isOpen && (
-                <div>
+                <div className={styles.day__content}>
                     {subjects.map((item, idx) => (
                         <Subject
                             key={idx}
