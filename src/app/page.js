@@ -20,81 +20,81 @@ const stages = [
 
 const groupsData = {
     Monday: [
-        { subject: 'Math', cabinet: 'A-101', teacher: 'Иванов И. И.' },
-        { subject: 'Physics', cabinet: 'B-202', teacher: 'Петров П. П.' }
+        { subject: 'Математика', cabinet: 'А-101', teacher: 'Иванов И. И.' },
+        { subject: 'Физика', cabinet: 'Б-202', teacher: 'Петров П. П.' }
     ],
     Tuesday: [
-        { subject: 'Chemistry', cabinet: 'C-303', teacher: 'Сидоров С. С.' }
+        { subject: 'Химия', cabinet: 'В-303', teacher: 'Сидоров С. С.' }
     ],
     Wednesday: [],
     Thursday: [
-        { subject: 'Biology', cabinet: 'D-404', teacher: 'Кузнецов К. К.' }
+        { subject: 'Биология', cabinet: 'Г-404', teacher: 'Кузнецов К. К.' }
     ],
     Friday: [
-        { subject: 'History', cabinet: 'E-505', teacher: 'Смирнов С. С.' }
+        { subject: 'История', cabinet: 'Д-505', teacher: 'Смирнов С. С.' }
     ],
     Saturday: [
-        { subject: 'Art', cabinet: 'F-606', teacher: 'Попов П. П.' }
+        { subject: 'Искусство', cabinet: 'А-606', teacher: 'Попов П. П.' }
     ],
 };
 
-const teachers = {
+const teachersData = {
     Monday: [
-        { subject: 'Math', cabinet: 'A-101', teacher: 'Иванов И. И.' },
-        { subject: 'Physics', cabinet: 'B-202', teacher: 'Петров П. П.' }
+        { subject: 'Английский', cabinet: 'Б-107', teacher: 'Иванов И. И.' },
+        { subject: 'География', cabinet: 'В-208', teacher: 'Петров П. П.' }
     ],
-    Tuesday: [
-        { subject: 'Chemistry', cabinet: 'C-303', teacher: 'Сидоров С. С.' }
+    Tuesday: [],
+    Wednesday: [
+        { subject: 'Литература', cabinet: 'Г-309', teacher: 'Сидоров С. С.' }
     ],
-    Wednesday: [],
     Thursday: [
-        { subject: 'Biology', cabinet: 'D-404', teacher: 'Кузнецов К. К.' }
+        { subject: 'Музыка', cabinet: 'Д-410', teacher: 'Кузнецов К. К.' }
     ],
     Friday: [
-        { subject: 'History', cabinet: 'E-505', teacher: 'Смирнов С. С.' }
+        { subject: 'Физкультура', cabinet: 'А-511', teacher: 'Смирнов С. С.' }
     ],
     Saturday: [
-        { subject: 'Art', cabinet: 'F-606', teacher: 'Попов П. П.' }
+        { subject: 'Информатика', cabinet: 'Б-612', teacher: 'Попов П. П.' }
     ],
 };
 
-const cabinets = {
+const cabinetsData = {
     Monday: [
-        { subject: 'Math', cabinet: 'A-101', teacher: 'Иванов И. И.' },
-        { subject: 'Physics', cabinet: 'B-202', teacher: 'Петров П. П.' }
+        { subject: 'Математика', cabinet: 'В-113', teacher: 'Иванов И. И.' },
+        { subject: 'Физика', cabinet: 'Г-214', teacher: 'Петров П. П.' }
     ],
     Tuesday: [
-        { subject: 'Chemistry', cabinet: 'C-303', teacher: 'Сидоров С. С.' }
+        { subject: 'Химия', cabinet: 'Д-315', teacher: 'Сидоров С. С.' }
     ],
-    Wednesday: [],
-    Thursday: [
-        { subject: 'Biology', cabinet: 'D-404', teacher: 'Кузнецов К. К.' }
+    Wednesday: [
+        { subject: 'Биология', cabinet: 'А-416', teacher: 'Кузнецов К. К.' }
     ],
+    Thursday: [],
     Friday: [
-        { subject: 'History', cabinet: 'E-505', teacher: 'Смирнов С. С.' }
+        { subject: 'История', cabinet: 'Б-517', teacher: 'Смирнов С. С.' }
     ],
     Saturday: [
-        { subject: 'Art', cabinet: 'F-606', teacher: 'Попов П. П.' }
+        { subject: 'Искусство', cabinet: 'В-618', teacher: 'Попов П. П.' }
     ],
 };
 
-const subjects = {
+const subjectsData = {
     Monday: [
-        { subject: 'Math', cabinet: 'A-101', teacher: 'Иванов И. И.' },
-        { subject: 'Physics', cabinet: 'B-202', teacher: 'Петров П. П.' }
+        { subject: 'Алгебра', cabinet: 'Г-119', teacher: 'Иванов И. И.' },
+        { subject: 'Геометрия', cabinet: 'Д-220', teacher: 'Петров П. П.' }
     ],
     Tuesday: [
-        { subject: 'Chemistry', cabinet: 'C-303', teacher: 'Сидоров С. С.' }
+        { subject: 'Экономика', cabinet: 'А-321', teacher: 'Сидоров С. С.' }
     ],
-    Wednesday: [],
+    Wednesday: [
+        { subject: 'Психология', cabinet: 'Б-422', teacher: 'Кузнецов К. К.' }
+    ],
     Thursday: [
-        { subject: 'Biology', cabinet: 'D-404', teacher: 'Кузнецов К. К.' }
+        { subject: 'Социология', cabinet: 'В-523', teacher: 'Смирнов С. С.' }
     ],
-    Friday: [
-        { subject: 'History', cabinet: 'E-505', teacher: 'Смирнов С. С.' }
-    ],
+    Friday: [],
     Saturday: [
-        { subject: 'Art', cabinet: 'F-606', teacher: 'Попов П. П.' }
+        { subject: 'Философия', cabinet: 'Г-624', teacher: 'Попов П. П.' }
     ],
 };
 
@@ -123,11 +123,11 @@ export default function Home() {
             case 0:
                 return groupsData;
             case 1:
-                return teachers;
+                return teachersData;
             case 2:
-                return cabinets;
+                return cabinetsData;
             case 3:
-                return subjects;
+                return subjectsData;
             default:
                 return null;
         }
