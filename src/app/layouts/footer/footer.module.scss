@@ -1,0 +1,11 @@
+.footer {
+  display: flex;
+  align-items: start;
+  gap: 16px;
+
+  &__title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    line-height: 20px;
+  }
+}
