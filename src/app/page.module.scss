@@ -19,12 +19,23 @@
   border: none;
   cursor: pointer;
   transition: background 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .active {
-  background: linear-gradient(to right, #ff7e5f, #feb47b);
-  background-size: 200% 200%;
-  animation: loading 2s linear infinite;
+  background: white;
+}
+
+.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: blue;
+  animation: loading 5s linear forwards;
 }
 
 .inactive {
@@ -39,9 +50,9 @@
 
 @keyframes loading {
   0% {
-    background-position: 200% 0;
+    width: 0;
   }
   100% {
-    background-position: -200% 0;
+    width: 100%;
   }
 }
