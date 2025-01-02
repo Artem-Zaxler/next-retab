@@ -1,16 +1,17 @@
 .header {
   display: flex;
-  align-items: start;
+  align-items: center;
   gap: 16px;
 
   &__logo {
-    max-width: 64px;
-    max-height: 64px;
+    max-width: 48px;
+    max-height: 48px;
   }
 
   &__title {
     font-family: 'Roboto', sans-serif;
-    font-size: 18px;
-    line-height: 20px;
+    font-size: 28px;
+    line-height: 32px;
+    font-weight: 400;
   }
 }
