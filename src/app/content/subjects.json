@@ -1,0 +1,19 @@
+{
+  "Monday": [
+    { "subject": "Алгебра", "cabinet": "Г-119", "teacher": "Иванов И. И." },
+    { "subject": "Геометрия", "cabinet": "Д-220", "teacher": "Петров П. П." }
+  ],
+  "Tuesday": [
+    { "subject": "Экономика", "cabinet": "А-321", "teacher": "Сидоров С. С." }
+  ],
+  "Wednesday": [
+    { "subject": "Психология", "cabinet": "Б-422", "teacher": "Кузнецов К. К." }
+  ],
+  "Thursday": [
+    { "subject": "Социология", "cabinet": "В-523", "teacher": "Смирнов С. С." }
+  ],
+  "Friday": [],
+  "Saturday": [
+    { "subject": "Философия", "cabinet": "Г-624", "teacher": "Попов П. П." }
+  ]
+}

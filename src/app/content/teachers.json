@@ -1,0 +1,19 @@
+{
+  "Monday": [
+    { "subject": "Английский", "cabinet": "Б-107", "teacher": "Иванов И. И." },
+    { "subject": "География", "cabinet": "В-208", "teacher": "Петров П. П." }
+  ],
+  "Tuesday": [],
+  "Wednesday": [
+    { "subject": "Литература", "cabinet": "Г-309", "teacher": "Сидоров С. С." }
+  ],
+  "Thursday": [
+    { "subject": "Музыка", "cabinet": "Д-410", "teacher": "Кузнецов К. К." }
+  ],
+  "Friday": [
+    { "subject": "Физкультура", "cabinet": "А-511", "teacher": "Смирнов С. С." }
+  ],
+  "Saturday": [
+    { "subject": "Информатика", "cabinet": "Б-612", "teacher": "Попов П. П." }
+  ]
+}

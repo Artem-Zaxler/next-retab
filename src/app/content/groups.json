@@ -1,0 +1,19 @@
+{
+  "Monday": [
+    { "subject": "Математика", "cabinet": "А-101", "teacher": "Иванов И. И." },
+    { "subject": "Физика", "cabinet": "Б-202", "teacher": "Петров П. П." }
+  ],
+  "Tuesday": [
+    { "subject": "Химия", "cabinet": "В-303", "teacher": "Сидоров С. С." }
+  ],
+  "Wednesday": [],
+  "Thursday": [
+    { "subject": "Биология", "cabinet": "Г-404", "teacher": "Кузнецов К. К." }
+  ],
+  "Friday": [
+    { "subject": "История", "cabinet": "Д-505", "teacher": "Смирнов С. С." }
+  ],
+  "Saturday": [
+    { "subject": "Искусство", "cabinet": "А-606", "teacher": "Попов П. П." }
+  ]
+}
