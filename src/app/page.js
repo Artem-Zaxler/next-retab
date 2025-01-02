@@ -29,6 +29,7 @@ export default function Home() {
     const [selectedFilter, setSelectedFilter] = useState(null);
     const [scheduleData, setScheduleData] = useState(null);
     const [isAnimating, setIsAnimating] = useState(true);
+    const [pagePaddingTop, setPagePaddingTop] = useState(350);
 
     useEffect(() => {
         const savedFilter = localStorage.getItem('selectedFilter');
@@ -37,6 +38,10 @@ export default function Home() {
             setActiveStage(parseInt(savedFilter, 10));
             setIndex(parseInt(savedFilter, 10));
             setIsAnimating(false);
+
+            setPagePaddingTop(200);
+        } else {
+            setPagePaddingTop(350);
         }
     }, []);
 
@@ -90,7 +95,7 @@ export default function Home() {
     };
 
     return (
-        <div className={styles.home}>
+        <div className={styles.home} style={{ paddingTop: `${pagePaddingTop}px` }}>
             <img
                 src={backgrounds[index]}
                 alt={'background-image'}
