@@ -11,7 +11,7 @@ export default function Day ({ day, subjects }) {
 
     return (
         <div className={styles.day}>
-            <div className={styles.day__panel} onClick={toggleOpen} style={{ cursor: 'pointer' }}>
+            <div className={styles.day__panel} onClick={toggleOpen}>
                 <span className={styles.day__title}>{day}</span>
 
                 <img
@@ -25,7 +25,12 @@ export default function Day ({ day, subjects }) {
             {isOpen && (
                 <div>
                     {subjects.map((item, idx) => (
-                        <Subject key={idx} subject={item.subject} cabinet={item.cabinet} teacher={item.teacher} />
+                        <Subject
+                            key={idx}
+                            subject={item.subject}
+                            cabinet={item.cabinet}
+                            teacher={item.teacher}
+                        />
                     ))}
                 </div>
             )}
