@@ -4,7 +4,7 @@ import {useEffect, useState} from 'react';
 import styles from './page.module.scss';
 
 const backgrounds = [
-    '/stage-backgrounds/groups-1.png',
+    '/stage-backgrounds/groups-2.png',
     '/stage-backgrounds/academic-stuff-1.png',
     '/stage-backgrounds/cabinets-1.png',
     '/stage-backgrounds/subject-1.png',
@@ -45,7 +45,8 @@ export default function Home() {
                 className={styles.home__background}
             />
 
-            <h1>Расписание</h1>
+            <h1 className={styles.home__title}>Расписание</h1>
+
             <div className={styles.home__filterButtons}>
                 {stages.map((stage, i) => (
                     <button
