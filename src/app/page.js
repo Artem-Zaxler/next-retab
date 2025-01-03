@@ -46,6 +46,7 @@ const Home = () => {
 
     useEffect(() => {
         const savedFilter = localStorage.getItem('selectedScheduleFilter');
+        const savedSubFilter = localStorage.getItem('selectedScheduleSubFilter');
         const savedShowAllDays = localStorage.getItem('showAllDays') === 'true';
         if (savedFilter !== null) {
             setSelectedFilter(parseInt(savedFilter, 10));
@@ -55,6 +56,9 @@ const Home = () => {
             setPagePaddingTop(isMobile ? 15 : 150);
         } else {
             setPagePaddingTop(isMobile ? 30 : 300);
+        }
+        if (savedSubFilter !== null) {
+            setSelectedSubFilter(savedSubFilter);
         }
         setShowAllDays(savedShowAllDays);
     }, [isMobile]);
@@ -101,10 +105,12 @@ const Home = () => {
         setSelectedSubFilter(null);
         setIsAnimating(false);
         localStorage.setItem('selectedScheduleFilter', stageIndex);
+        localStorage.removeItem('selectedScheduleSubFilter');
     };
 
     const handleSubFilterClick = (subFilter) => {
         setSelectedSubFilter(subFilter);
+        localStorage.setItem('selectedScheduleSubFilter', subFilter);
     };
 
     const handleDateChange = (date) => {
