@@ -1,7 +1,13 @@
+@import "./assets/mixins/media";
+
 .container {
   display: flex;
   flex-direction: column;
   padding: 20px 200px;
+
+  @include media-tablet-and-mobile {
+    padding: 20px;
+  }
 
   &_mainPage {
     min-height: 100vh;
@@ -14,6 +20,10 @@
     height: 45px;
     z-index: 10;
     transition: 0.3s ease-in-out;
+
+    @include media-tablet-and-mobile {
+      height: 25px;
+    }
 
     &_scrolled {
       background: rgba(26, 102, 224, 0.8);

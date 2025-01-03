@@ -4,9 +4,12 @@ import { useEffect, useState } from 'react';
 import styles from "./header.module.scss";
 import stylesLayout from "../../layout.module.scss";
 import Link from "next/link";
+import {useMedia} from "../../../hooks/useMedia";
 
 export default function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
+
+    const { isMobile } = useMedia();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -43,6 +46,10 @@ export default function Header() {
                     <div className={styles.header__links}>
                         <Link href={'/profile'}>
                             <span className={styles.header__link}>Личный кабинет</span>
+                        </Link>
+
+                        <Link href={'/'}>
+                            <span className={styles.header__link}>Расписание</span>
                         </Link>
                     </div>
                 </div>
