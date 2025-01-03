@@ -1,8 +1,11 @@
+'use client';
+
 import styles from "./header.module.scss";
 import stylesLayout from "../../layout.module.scss";
 import Link from "next/link";
 
 export default function Header() {
+
     return (
         <header>
             <div className={`${stylesLayout.container} ${stylesLayout.container_header}`}>
@@ -13,7 +16,9 @@ export default function Header() {
                         alt={'kgeu-logo'}
                     />
 
-                    <h1 className={styles.header__title}>Retab</h1>
+                    <Link href='/'>
+                        <h1 className={styles.header__title}>Retab</h1>
+                    </Link>
 
                     <div className={styles.header__links}>
                         <Link href={'/profile'}>
