@@ -31,7 +31,9 @@ export default function Day({ day, subjects, isCurrentDay, showAllDays, collapse
 
     useEffect(() => {
         if (isOpen && contentRef.current) {
-            contentRef.current.style.maxHeight = `${contentRef.current.scrollHeight}px`;
+            const padding = 30;
+            const gap = 20 * (subjects.length - 1);
+            contentRef.current.style.maxHeight = `${contentRef.current.scrollHeight + padding + gap}px`;
             contentRef.current.style.padding = '10px 20px 20px';
             if (contentLineRef.current) {
                 contentLineRef.current.style.opacity = '1';
