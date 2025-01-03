@@ -8,9 +8,6 @@ export function generateSchedule(startOfWeek) {
         schedule[day] = generateDaySchedule(date);
     });
 
-    console.log('Generating schedule for the week starting on:', startOfWeek.toDateString());
-    console.log('Schedule:', schedule);
-
     return schedule;
 }
 
@@ -30,9 +27,6 @@ function generateDaySchedule(date) {
         const randomIndex = Math.floor(Math.random() * subjects.length);
         daySchedule.push(subjects[randomIndex]);
     }
-
-    console.log('Generating schedule for:', date.toDateString());
-    console.log('Day schedule:', daySchedule);
 
     return daySchedule;
 }

@@ -92,16 +92,7 @@ export default function Home() {
         const endOfWeek = new Date(startOfWeek);
         endOfWeek.setDate(startOfWeek.getDate() + 6);
         setCurrentWeek({start: startOfWeek, end: endOfWeek});
-
-        console.log(`Current day: ${days[dayOfWeek]}`);
-        console.log(`Current week: ${startOfWeek.toDateString()} to ${endOfWeek.toDateString()}`);
     }, []);
-
-    useEffect(() => {
-        if (scheduleData) {
-            console.log('Schedule for the current week:', scheduleData);
-        }
-    }, [scheduleData]);
 
     const handleButtonClick = (stageIndex) => {
         setActiveStage(stageIndex);
@@ -126,12 +117,9 @@ export default function Home() {
         newEndOfWeek.setDate(newStartOfWeek.getDate() + 6);
 
         if (currentWeek && (date < currentWeek.start || date > currentWeek.end)) {
-            console.log(`Week changed from ${currentWeek.start.toDateString()} to ${currentWeek.end.toDateString()} to ${newStartOfWeek.toDateString()} to ${newEndOfWeek.toDateString()}`);
             setCurrentWeek({start: newStartOfWeek, end: newEndOfWeek});
             const newScheduleData = generateSchedule(date);
             setScheduleData(newScheduleData);
-        } else {
-            console.log(`Week remains the same: ${currentWeek.start.toDateString()} to ${currentWeek.end.toDateString()}`);
         }
 
         const dayOfWeek = date.getDay();
