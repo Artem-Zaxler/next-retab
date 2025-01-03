@@ -82,7 +82,7 @@ const Day = ({ day, date, subjects, isCurrentDay, showAllDays, collapse, expand 
         <div className={`${styles.day} ${isCurrentDay ? styles.day_current : ''}`}>
             <div className={styles.day__panel} onClick={toggleOpen}>
                 <span className={styles.day__title}>{dayName}</span>
-                <span className={styles.day__title}>{formattedDate}</span>
+                <span className={styles.day__date}>{formattedDate}</span>
                 <img
                     src={'/svg/arrow.svg'}
                     alt={'arrow'}
