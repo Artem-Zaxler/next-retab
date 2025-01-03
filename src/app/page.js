@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react';
 import styles from './page.module.scss';
 import Day from "./components/Day/Day";
+import CustomDatePicker from './components/DatePicker/DatePicker';
+import { generateSchedule } from '../utils/scheduleGenerator';
 
 const backgrounds = [
     '/images/stage-backgrounds/groups-2.png',
@@ -18,11 +20,6 @@ const filters = [
     { text: 'По предмету', content: 'Расписание по предмету' },
 ];
 
-async function fetchData(filename) {
-    const data = await import(`./content/${filename}.json`);
-    return data.default;
-}
-
 export default function Home() {
     const [index, setIndex] = useState(0);
     const [activeStage, setActiveStage] = useState(0);
@@ -30,6 +27,7 @@ export default function Home() {
     const [scheduleData, setScheduleData] = useState(null);
     const [isAnimating, setIsAnimating] = useState(true);
     const [pagePaddingTop, setPagePaddingTop] = useState(50);
+    const [selectedDate, setSelectedDate] = useState(new Date());
 
     useEffect(() => {
         const savedFilter = localStorage.getItem('selectedScheduleFilter');
@@ -38,7 +36,6 @@ export default function Home() {
             setActiveStage(parseInt(savedFilter, 10));
             setIndex(parseInt(savedFilter, 10));
             setIsAnimating(false);
-
             setPagePaddingTop(50);
         } else {
             setPagePaddingTop(200);
@@ -60,16 +57,16 @@ export default function Home() {
         const loadScheduleData = async () => {
             switch (selectedFilter) {
                 case 0:
-                    setScheduleData(await fetchData('groups'));
+                    setScheduleData(generateSchedule(selectedDate));
                     break;
                 case 1:
-                    setScheduleData(await fetchData('teachers'));
+                    setScheduleData(generateSchedule(selectedDate));
                     break;
                 case 2:
-                    setScheduleData(await fetchData('cabinets'));
+                    setScheduleData(generateSchedule(selectedDate));
                     break;
                 case 3:
-                    setScheduleData(await fetchData('subjects'));
+                    setScheduleData(generateSchedule(selectedDate));
                     break;
                 default:
                     setScheduleData(null);
@@ -77,7 +74,7 @@ export default function Home() {
         };
 
         loadScheduleData();
-    }, [selectedFilter]);
+    }, [selectedFilter, selectedDate]);
 
     const handleButtonClick = (stageIndex) => {
         setActiveStage(stageIndex);
@@ -115,6 +112,8 @@ export default function Home() {
                     </button>
                 ))}
             </div>
+
+            <CustomDatePicker selectedDate={selectedDate} onChange={(date) => setSelectedDate(date)} />
 
             <div className={`${styles.home__content} ${scheduleData ? styles.home__content_hasSchedule : ""}`}>
                 {scheduleData ? (
