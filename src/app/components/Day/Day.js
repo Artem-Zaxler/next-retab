@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import Subject from '../Subject/Subject';
 import styles from "./day.module.scss";
 
-export default function Day({ day, subjects, isCurrentDay, showAllDays }) {
+export default function Day({ day, subjects, isCurrentDay, showAllDays, collapse, expand }) {
     const [isOpen, setIsOpen] = useState(false);
     const contentRef = useRef(null);
     const contentLineRef = useRef(null);
@@ -16,6 +16,18 @@ export default function Day({ day, subjects, isCurrentDay, showAllDays }) {
             setIsOpen(false);
         }
     }, [showAllDays, isCurrentDay]);
+
+    useEffect(() => {
+        if (collapse) {
+            setIsOpen(false);
+        }
+    }, [collapse]);
+
+    useEffect(() => {
+        if (expand) {
+            setIsOpen(true);
+        }
+    }, [expand]);
 
     useEffect(() => {
         if (isOpen && contentRef.current) {
@@ -31,7 +43,7 @@ export default function Day({ day, subjects, isCurrentDay, showAllDays }) {
                 contentLineRef.current.style.opacity = '0';
             }
         }
-    }, [isOpen, subjects]); // Add subjects to the dependency array
+    }, [isOpen, subjects]);
 
     const toggleOpen = () => {
         setIsOpen(!isOpen);
