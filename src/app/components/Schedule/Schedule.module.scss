@@ -1,0 +1,36 @@
+@import "../../layout.module";
+
+.schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+  font-size: 20px;
+  max-width: 80%;
+
+  @include media-tablet-and-mobile {
+    max-width: 100%;
+  }
+
+  & > span {
+    border: none !important;
+    text-shadow: 2px 2px 4px black;
+  }
+
+  &__columns {
+    display: flex;
+    gap: 20px;
+  }
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__scheduleColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}

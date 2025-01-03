@@ -28,115 +28,6 @@
     text-shadow: 3px 3px 6px rgba(0, 0, 0, 1);
   }
 
-  &__filterButtons {
-    display: flex;
-    gap: 10px;
-
-    @include media-tablet-and-mobile {
-      flex-direction: column;
-    }
-  }
-
-  &__filterButton {
-    padding: 10px 20px;
-    border: solid #c2c2c2 0.5px;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    color: black;
-    z-index: 0;
-    font-family: 'Onest', sans-serif;
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 17px;
-    outline: none;
-
-    &_active {
-      background: white;
-
-      @include media-tablet-and-mobile {
-        background: rgba(26, 102, 224, 0.95);
-        color: white;
-      }
-
-      &_animated::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 0;
-        height: 100%;
-        background: rgba(26, 102, 224, 0.25);
-        z-index: -1;
-        animation: loading 5s linear forwards;
-      }
-    }
-
-    &_inactive {
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(8px);
-    }
-  }
-
-  &__content {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 20px;
-    font-size: 20px;
-    max-width: 80%;
-
-    @include media-tablet-and-mobile {
-      max-width: 100%;
-    }
-
-    & > span {
-      border: none !important;
-      text-shadow: 2px 2px 4px black;
-    }
-  }
-
-  &__columns {
-    display: flex;
-    gap: 20px;
-  }
-
-  &__column {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  &__showAllDays {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    border-radius: 20px;
-    background: rgba(26, 102, 224, 0.95);
-    border: solid white 0.5px;
-    padding: 10px 15px;
-    cursor: pointer;
-    position: relative;
-    user-select: none;
-  }
-
-  &__showAllDaysInput {
-    display: none;
-  }
-
-  &__showAllDaysIcon {
-    max-width: 16px !important;
-    max-height: 16px !important;
-  }
-
-  &__scheduleColumn {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
   &__mobileSettings {
     display: flex;
     align-items: center;
@@ -168,6 +59,46 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+  }
+
+  &__showAllDays {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 20px;
+    background: rgba(26, 102, 224, 0.95);
+    border: solid white 0.5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+  }
+
+  &__showAllDaysInput {
+    display: none;
+  }
+
+  &__showAllDaysIcon {
+    max-width: 16px !important;
+    max-height: 16px !important;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+    font-size: 20px;
+    max-width: 80%;
+
+    @include media-tablet-and-mobile {
+      max-width: 100%;
+    }
+
+    & > span {
+      border: none !important;
+      text-shadow: 2px 2px 4px black;
+    }
   }
 }
 

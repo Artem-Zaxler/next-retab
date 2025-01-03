@@ -1,0 +1,34 @@
+@import "../../layout.module";
+
+.subFilters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+
+  &__button {
+    padding: 10px 20px;
+    border: solid #c2c2c2 0.5px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    color: black;
+    z-index: 0;
+    font-family: 'Onest', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 17px;
+    outline: none;
+
+    &_active {
+      background: rgba(26, 102, 224, 0.95);
+      color: white;
+    }
+
+    &_inactive {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(8px);
+    }
+  }
+}
