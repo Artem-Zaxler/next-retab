@@ -31,7 +31,7 @@ export default function Day({ day, subjects, isCurrentDay, showAllDays }) {
                 contentLineRef.current.style.opacity = '0';
             }
         }
-    }, [isOpen]);
+    }, [isOpen, subjects]); // Add subjects to the dependency array
 
     const toggleOpen = () => {
         setIsOpen(!isOpen);
