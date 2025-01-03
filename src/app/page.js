@@ -113,15 +113,19 @@ export default function Home() {
 
     const handleDateChange = (date) => {
         setSelectedDate(date);
+
         const newStartOfWeek = new Date(date);
-        newStartOfWeek.setDate(date.getDate() - date.getDay() + 1);
+        const dayOfWeek = date.getDay();
+        const diff = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
+        newStartOfWeek.setDate(date.getDate() + diff);
+
         const newEndOfWeek = new Date(newStartOfWeek);
         newEndOfWeek.setDate(newStartOfWeek.getDate() + 6);
 
         if (currentWeek && (date < currentWeek.start || date > currentWeek.end)) {
             setCurrentWeek({ start: newStartOfWeek, end: newEndOfWeek });
             const newScheduleData = generateSchedule(date);
-            setScheduleData(newScheduleData)
+            setScheduleData(newScheduleData);
 
             setCollapse(true);
             setTimeout(() => {
@@ -133,10 +137,10 @@ export default function Home() {
             }, 500);
         }
 
-        const dayOfWeek = date.getDay();
         const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         setCurrentDay(days[dayOfWeek]);
     };
+
 
     const handleShowAllDaysChange = () => {
         const newShowAllDays = !showAllDays;
