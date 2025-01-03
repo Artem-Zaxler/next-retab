@@ -31,7 +31,6 @@ export default function Home() {
     const [currentDay, setCurrentDay] = useState(null);
     const [currentWeek, setCurrentWeek] = useState(null);
     const [showAllDays, setShowAllDays] = useState(false);
-    const [isCurrentDay, setIsCurrentDay] = useState(false);
     const [collapse, setCollapse] = useState(false);
     const [expand, setExpand] = useState(false);
 
@@ -137,8 +136,6 @@ export default function Home() {
         const dayOfWeek = date.getDay();
         const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         setCurrentDay(days[dayOfWeek]);
-
-
     };
 
     const handleShowAllDaysChange = () => {
