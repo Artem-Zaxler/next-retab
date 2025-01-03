@@ -123,19 +123,24 @@ export default function Home() {
         newEndOfWeek.setDate(newStartOfWeek.getDate() + 6);
 
         if (currentWeek && (date < currentWeek.start || date > currentWeek.end)) {
-            setCurrentWeek({ start: newStartOfWeek, end: newEndOfWeek });
-            const newScheduleData = generateSchedule(date);
-            setScheduleData(newScheduleData);
-
             setCollapse(true);
+
             setTimeout(() => {
-                setCollapse(false);
-                setExpand(true);
+                setCurrentWeek({ start: newStartOfWeek, end: newEndOfWeek });
+                const newScheduleData = generateSchedule(date);
+                setScheduleData(newScheduleData);
+
                 setTimeout(() => {
-                    setExpand(false);
-                }, 500);
+                    setCollapse(false);
+                    setExpand(true);
+
+                    setTimeout(() => {
+                        setExpand(false);
+                    }, 500);
+                }, 1);
             }, 500);
         }
+
 
         const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         setCurrentDay(days[dayOfWeek]);
