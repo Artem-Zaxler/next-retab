@@ -1,34 +1,24 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const useMedia = () => {
-  const [deviceType, setDeviceType] = useState({
-    isDesktop: false,
-    isTablet: false,
-    isMobile: false,
-  });
+    const [matches, setMatches] = useState(false);
 
-  useEffect(() => {
-    const updateDeviceType = () => {
-      const width = window.innerWidth;
-      if (width > 1024) {
-        setDeviceType({ isDesktop: true, isTablet: false, isMobile: false });
-      } else if (width >= 480 && width <= 1024) {
-        setDeviceType({ isDesktop: false, isTablet: true, isMobile: false });
-      } else if (width < 480) {
-        setDeviceType({ isDesktop: false, isTablet: false, isMobile: true });
-      }
-    };
+    useEffect(() => {
+        const mediaQueryList = window.matchMedia('(max-width: 480px)');
+        const updateMatches = () => setMatches(mediaQueryList.matches);
 
-    updateDeviceType();
+        updateMatches();
 
-    window.addEventListener('resize', updateDeviceType);
+        mediaQueryList.addEventListener('change', updateMatches);
 
-    return () => {
-      window.removeEventListener('resize', updateDeviceType);
-    };
-  }, []);
+        return () => {
+            mediaQueryList.removeEventListener('change', updateMatches);
+        };
+    }, []);
 
-  return deviceType;
+    const isMobile = matches;
+
+    return {isMobile};
 };
 
 export default useMedia;
