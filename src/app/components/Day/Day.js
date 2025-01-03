@@ -15,10 +15,35 @@ export default function Day({day, subjects}) {
         console.log(isOpen)
     }, [isOpen]);
 
+    let dayName;
+    switch (day) {
+        case "Monday":
+            dayName = 'Понедельник';
+            break;
+        case "Tuesday":
+            dayName = 'Вторник';
+            break;
+        case "Wednesday":
+            dayName = 'Среда';
+            break;
+        case "Thursday":
+            dayName = 'Четверг';
+            break;
+        case "Friday":
+            dayName = 'Пятница';
+            break;
+        case "Saturday":
+            dayName = 'Суббота';
+            break;
+        default:
+            dayName = day;
+            break;
+    }
+
     return (
         <div className={styles.day}>
             <div className={styles.day__panel} onClick={toggleOpen}>
-                <span className={styles.day__title}>{day}</span>
+                <span className={styles.day__title}>{dayName}</span>
 
                 <img
                     src={'/svg/arrow.svg'}
