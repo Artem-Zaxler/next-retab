@@ -4,8 +4,14 @@ import React, {useEffect, useState} from 'react';
 import Subject from '../Subject/Subject';
 import styles from "./day.module.scss";
 
-export default function Day({day, subjects, isCurrentDay}) {
+export default function Day({day, subjects, isCurrentDay, showAllDays}) {
     const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(() => {
+        if (showAllDays || isCurrentDay) {
+            setIsOpen(true);
+        }
+    }, [showAllDays, isCurrentDay]);
 
     const toggleOpen = () => {
         setIsOpen(!isOpen);

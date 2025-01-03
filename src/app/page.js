@@ -30,9 +30,11 @@ export default function Home() {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [currentDay, setCurrentDay] = useState(null);
     const [currentWeek, setCurrentWeek] = useState(null);
+    const [showAllDays, setShowAllDays] = useState(false);
 
     useEffect(() => {
         const savedFilter = localStorage.getItem('selectedScheduleFilter');
+        const savedShowAllDays = localStorage.getItem('showAllDays') === 'true';
         if (savedFilter !== null) {
             setSelectedFilter(parseInt(savedFilter, 10));
             setActiveStage(parseInt(savedFilter, 10));
@@ -42,6 +44,7 @@ export default function Home() {
         } else {
             setPagePaddingTop(200);
         }
+        setShowAllDays(savedShowAllDays);
     }, []);
 
     useEffect(() => {
@@ -131,6 +134,12 @@ export default function Home() {
         }
     };
 
+    const handleShowAllDaysChange = () => {
+        const newShowAllDays = !showAllDays;
+        setShowAllDays(newShowAllDays);
+        localStorage.setItem('showAllDays', newShowAllDays);
+    };
+
     return (
         <div className={styles.home} style={{ paddingTop: `${pagePaddingTop}px` }}>
             <img
@@ -155,20 +164,31 @@ export default function Home() {
 
             <CustomDatePicker selectedDate={selectedDate} onChange={handleDateChange} />
 
+            <div className={styles.home__showAllDays}>
+                <label>
+                    <input
+                        type="checkbox"
+                        checked={showAllDays}
+                        onChange={handleShowAllDaysChange}
+                    />
+                    Показывать всю неделю
+                </label>
+            </div>
+
             <div className={`${styles.home__content} ${scheduleData ? styles.home__content_hasSchedule : ""}`}>
                 {scheduleData ? (
                     <div className={styles.home__columns}>
                         <div className={styles.home__column}>
-                            <Day day="Monday" subjects={scheduleData.Monday} isCurrentDay={currentDay === 'Monday'} />
-                            <Day day="Thursday" subjects={scheduleData.Thursday} isCurrentDay={currentDay === 'Thursday'} />
+                            <Day day="Monday" subjects={scheduleData.Monday} isCurrentDay={currentDay === 'Monday'} showAllDays={showAllDays} />
+                            <Day day="Thursday" subjects={scheduleData.Thursday} isCurrentDay={currentDay === 'Thursday'} showAllDays={showAllDays} />
                         </div>
                         <div className={styles.home__column}>
-                            <Day day="Tuesday" subjects={scheduleData.Tuesday} isCurrentDay={currentDay === 'Tuesday'} />
-                            <Day day="Friday" subjects={scheduleData.Friday} isCurrentDay={currentDay === 'Friday'} />
+                            <Day day="Tuesday" subjects={scheduleData.Tuesday} isCurrentDay={currentDay === 'Tuesday'} showAllDays={showAllDays} />
+                            <Day day="Friday" subjects={scheduleData.Friday} isCurrentDay={currentDay === 'Friday'} showAllDays={showAllDays} />
                         </div>
                         <div className={styles.home__column}>
-                            <Day day="Wednesday" subjects={scheduleData.Wednesday} isCurrentDay={currentDay === 'Wednesday'} />
-                            <Day day="Saturday" subjects={scheduleData.Saturday} isCurrentDay={currentDay === 'Saturday'} />
+                            <Day day="Wednesday" subjects={scheduleData.Wednesday} isCurrentDay={currentDay === 'Wednesday'} showAllDays={showAllDays} />
+                            <Day day="Saturday" subjects={scheduleData.Saturday} isCurrentDay={currentDay === 'Saturday'} showAllDays={showAllDays} />
                         </div>
                     </div>
                 ) : (
