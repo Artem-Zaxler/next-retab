@@ -128,7 +128,8 @@ export default function Home() {
         if (currentWeek && (date < currentWeek.start || date > currentWeek.end)) {
             console.log(`Week changed from ${currentWeek.start.toDateString()} to ${currentWeek.end.toDateString()} to ${newStartOfWeek.toDateString()} to ${newEndOfWeek.toDateString()}`);
             setCurrentWeek({start: newStartOfWeek, end: newEndOfWeek});
-            setScheduleData(generateSchedule(date));
+            const newScheduleData = generateSchedule(date);
+            setScheduleData(newScheduleData);
         } else {
             console.log(`Week remains the same: ${currentWeek.start.toDateString()} to ${currentWeek.end.toDateString()}`);
         }
