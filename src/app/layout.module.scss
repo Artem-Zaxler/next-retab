@@ -6,4 +6,8 @@
   &_mainPage {
     min-height: 100vh;
   }
+
+  &_header {
+    background: linear-gradient(to right, rgba(26, 102, 224, 0.95), transparent);
+  }
 }

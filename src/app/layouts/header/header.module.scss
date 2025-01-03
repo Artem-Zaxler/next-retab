@@ -14,4 +14,22 @@
     line-height: 32px;
     font-weight: 400;
   }
+
+  &__links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 20px;
+  }
+
+  &__link {
+    font-size: 16px;
+    line-height: 18px;
+    font-weight: 300;
+    color: white;
+  }
+
+  a {
+    text-decoration: none;
+  }
 }
