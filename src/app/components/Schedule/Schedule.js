@@ -4,7 +4,16 @@ import styles from './Schedule.module.scss';
 
 const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-const Schedule = ({ scheduleData, isMobile, currentDay, getIsCurrentDay, showAllDays, collapseStates, expandStates }) => {
+const Schedule = ({ scheduleData, isMobile, currentDay, currentDate, getIsCurrentDay, showAllDays, collapseStates, expandStates }) => {
+    const startOfWeek = new Date(currentDate);
+    startOfWeek.setDate(currentDate.getDate() - currentDate.getDay());
+
+    const getDateForDay = (day) => {
+        const date = new Date(startOfWeek);
+        date.setDate(startOfWeek.getDate() + daysOfWeek.indexOf(day));
+        return date;
+    };
+
     return (
         <div className={styles.schedule}>
             {!isMobile ? (
@@ -12,6 +21,7 @@ const Schedule = ({ scheduleData, isMobile, currentDay, getIsCurrentDay, showAll
                     <div className={styles.schedule__column}>
                         <Day
                             day="Monday"
+                            date={getDateForDay('Monday')}
                             subjects={scheduleData.Monday}
                             isCurrentDay={currentDay === 'Monday' && getIsCurrentDay()}
                             showAllDays={showAllDays}
@@ -20,6 +30,7 @@ const Schedule = ({ scheduleData, isMobile, currentDay, getIsCurrentDay, showAll
                         />
                         <Day
                             day="Thursday"
+                            date={getDateForDay('Thursday')}
                             subjects={scheduleData.Thursday}
                             isCurrentDay={currentDay === 'Thursday' && getIsCurrentDay()}
                             showAllDays={showAllDays}
@@ -30,6 +41,7 @@ const Schedule = ({ scheduleData, isMobile, currentDay, getIsCurrentDay, showAll
                     <div className={styles.schedule__column}>
                         <Day
                             day="Tuesday"
+                            date={getDateForDay('Tuesday')}
                             subjects={scheduleData.Tuesday}
                             isCurrentDay={currentDay === 'Tuesday' && getIsCurrentDay()}
                             showAllDays={showAllDays}
@@ -38,6 +50,7 @@ const Schedule = ({ scheduleData, isMobile, currentDay, getIsCurrentDay, showAll
                         />
                         <Day
                             day="Friday"
+                            date={getDateForDay('Friday')}
                             subjects={scheduleData.Friday}
                             isCurrentDay={currentDay === 'Friday' && getIsCurrentDay()}
                             showAllDays={showAllDays}
@@ -48,6 +61,7 @@ const Schedule = ({ scheduleData, isMobile, currentDay, getIsCurrentDay, showAll
                     <div className={styles.schedule__column}>
                         <Day
                             day="Wednesday"
+                            date={getDateForDay('Wednesday')}
                             subjects={scheduleData.Wednesday}
                             isCurrentDay={currentDay === 'Wednesday' && getIsCurrentDay()}
                             showAllDays={showAllDays}
@@ -56,6 +70,7 @@ const Schedule = ({ scheduleData, isMobile, currentDay, getIsCurrentDay, showAll
                         />
                         <Day
                             day="Saturday"
+                            date={getDateForDay('Saturday')}
                             subjects={scheduleData.Saturday}
                             isCurrentDay={currentDay === 'Saturday' && getIsCurrentDay()}
                             showAllDays={showAllDays}
@@ -70,6 +85,7 @@ const Schedule = ({ scheduleData, isMobile, currentDay, getIsCurrentDay, showAll
                         <Day
                             key={index}
                             day={day}
+                            date={getDateForDay(day)}
                             subjects={scheduleData[day]}
                             isCurrentDay={currentDay === day && getIsCurrentDay()}
                             showAllDays={showAllDays}

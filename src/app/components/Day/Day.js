@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import Subject from '../Subject/Subject';
 import styles from "./day.module.scss";
 
-const Day = ({ day, subjects, isCurrentDay, showAllDays, collapse, expand }) => {
+const Day = ({ day, date, subjects, isCurrentDay, showAllDays, collapse, expand }) => {
     const [isOpen, setIsOpen] = useState(false);
     const contentRef = useRef(null);
     const contentLineRef = useRef(null);
@@ -76,10 +76,13 @@ const Day = ({ day, subjects, isCurrentDay, showAllDays, collapse, expand }) => 
             break;
     }
 
+    const formattedDate = date.toLocaleDateString();
+
     return (
         <div className={`${styles.day} ${isCurrentDay ? styles.day_current : ''}`}>
             <div className={styles.day__panel} onClick={toggleOpen}>
                 <span className={styles.day__title}>{dayName}</span>
+                <span className={styles.day__title}>{formattedDate}</span>
                 <img
                     src={'/svg/arrow.svg'}
                     alt={'arrow'}

@@ -281,6 +281,7 @@ const Home = () => {
                         scheduleData={scheduleData}
                         isMobile={isMobile}
                         currentDay={currentDay}
+                        currentDate={selectedDate}
                         getIsCurrentDay={getIsCurrentDay}
                         showAllDays={showAllDays}
                         collapseStates={collapseStates}
