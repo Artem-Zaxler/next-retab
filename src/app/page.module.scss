@@ -56,6 +56,11 @@
     &_active {
       background: white;
 
+      @include media-tablet-and-mobile {
+        background: rgba(26, 102, 224, 0.95);
+        color: white;
+      }
+
       &_animated::before {
         content: '';
         position: absolute;
