@@ -4,7 +4,7 @@ import React, {useEffect, useState} from 'react';
 import Subject from '../Subject/Subject';
 import styles from "./day.module.scss";
 
-export default function Day({day, subjects}) {
+export default function Day({day, subjects, isCurrentDay}) {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleOpen = () => {
@@ -41,7 +41,7 @@ export default function Day({day, subjects}) {
     }
 
     return (
-        <div className={styles.day}>
+        <div className={`${styles.day} ${isCurrentDay ? styles.day_current : ''}`}>
             <div className={styles.day__panel} onClick={toggleOpen}>
                 <span className={styles.day__title}>{dayName}</span>
 

@@ -1,7 +1,6 @@
 .day {
   display: flex;
   flex-direction: column;
-  gap: 10px;
   background: rgba(26, 102, 224, 0.95);
   backdrop-filter: blur(5px);
   border-radius: 20px;
@@ -41,6 +40,19 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding: 40px;
+    padding: 10px 40px 40px;
+  }
+
+  &_current {
+    background-color: white !important;
+    color: black !important;
+
+    & > div > span {
+      color: black !important;
+    }
+
+    & > div > .day__arrow {
+      filter: invert(1);
+    }
   }
 }

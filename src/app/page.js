@@ -28,6 +28,7 @@ export default function Home() {
     const [isAnimating, setIsAnimating] = useState(true);
     const [pagePaddingTop, setPagePaddingTop] = useState(50);
     const [selectedDate, setSelectedDate] = useState(new Date());
+    const [currentDay, setCurrentDay] = useState(null);
 
     useEffect(() => {
         const savedFilter = localStorage.getItem('selectedScheduleFilter');
@@ -76,6 +77,13 @@ export default function Home() {
         loadScheduleData();
     }, [selectedFilter, selectedDate]);
 
+    useEffect(() => {
+        const today = new Date();
+        const dayOfWeek = today.getDay();
+        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        setCurrentDay(days[dayOfWeek]);
+    }, []);
+
     const handleButtonClick = (stageIndex) => {
         setActiveStage(stageIndex);
         setIndex(stageIndex);
@@ -119,16 +127,16 @@ export default function Home() {
                 {scheduleData ? (
                     <div className={styles.home__columns}>
                         <div className={styles.home__column}>
-                            <Day day="Monday" subjects={scheduleData.Monday} />
-                            <Day day="Thursday" subjects={scheduleData.Thursday} />
+                            <Day day="Monday" subjects={scheduleData.Monday} isCurrentDay={currentDay === 'Monday'} />
+                            <Day day="Thursday" subjects={scheduleData.Thursday} isCurrentDay={currentDay === 'Thursday'} />
                         </div>
                         <div className={styles.home__column}>
-                            <Day day="Tuesday" subjects={scheduleData.Tuesday} />
-                            <Day day="Friday" subjects={scheduleData.Friday} />
+                            <Day day="Tuesday" subjects={scheduleData.Tuesday} isCurrentDay={currentDay === 'Tuesday'} />
+                            <Day day="Friday" subjects={scheduleData.Friday} isCurrentDay={currentDay === 'Friday'} />
                         </div>
                         <div className={styles.home__column}>
-                            <Day day="Wednesday" subjects={scheduleData.Wednesday} />
-                            <Day day="Saturday" subjects={scheduleData.Saturday} />
+                            <Day day="Wednesday" subjects={scheduleData.Wednesday} isCurrentDay={currentDay === 'Wednesday'} />
+                            <Day day="Saturday" subjects={scheduleData.Saturday} isCurrentDay={currentDay === 'Saturday'} />
                         </div>
                     </div>
                 ) : (

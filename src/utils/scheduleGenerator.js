@@ -1,7 +1,4 @@
-export function generateSchedule(selectedDate) {
-    const startOfWeek = new Date(selectedDate);
-    startOfWeek.setDate(selectedDate.getDate() - selectedDate.getDay() + 1); // Monday
-
+export function generateSchedule(startOfWeek) {
     const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const schedule = {};
 
