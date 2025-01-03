@@ -11,10 +11,6 @@ export default function Day({day, subjects, isCurrentDay}) {
         setIsOpen(!isOpen);
     };
 
-    useEffect(() => {
-        console.log(isOpen)
-    }, [isOpen]);
-
     let dayName;
     switch (day) {
         case "Monday":

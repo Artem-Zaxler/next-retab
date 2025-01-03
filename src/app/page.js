@@ -29,6 +29,7 @@ export default function Home() {
     const [pagePaddingTop, setPagePaddingTop] = useState(50);
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [currentDay, setCurrentDay] = useState(null);
+    const [currentWeek, setCurrentWeek] = useState(null);
 
     useEffect(() => {
         const savedFilter = localStorage.getItem('selectedScheduleFilter');
@@ -75,14 +76,29 @@ export default function Home() {
         };
 
         loadScheduleData();
-    }, [selectedFilter, selectedDate]);
+    }, [selectedFilter]);
 
     useEffect(() => {
         const today = new Date();
         const dayOfWeek = today.getDay();
         const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         setCurrentDay(days[dayOfWeek]);
+
+        const startOfWeek = new Date(today);
+        startOfWeek.setDate(today.getDate() - dayOfWeek + 1); // Set to Monday
+        const endOfWeek = new Date(startOfWeek);
+        endOfWeek.setDate(startOfWeek.getDate() + 6); // Set to Sunday
+        setCurrentWeek({ start: startOfWeek, end: endOfWeek });
+
+        console.log(`Current day: ${days[dayOfWeek]}`);
+        console.log(`Current week: ${startOfWeek.toDateString()} to ${endOfWeek.toDateString()}`);
     }, []);
+
+    useEffect(() => {
+        if (scheduleData) {
+            console.log('Schedule for the current week:', scheduleData);
+        }
+    }, [scheduleData]);
 
     const handleButtonClick = (stageIndex) => {
         setActiveStage(stageIndex);
@@ -97,6 +113,22 @@ export default function Home() {
             return isAnimating ? styles.home__filterButton_active_animated : styles.home__filterButton_active;
         }
         return styles.home__filterButton_inactive;
+    };
+
+    const handleDateChange = (date) => {
+        setSelectedDate(date);
+        const newStartOfWeek = new Date(date);
+        newStartOfWeek.setDate(date.getDate() - date.getDay() + 1); // Set to Monday
+        const newEndOfWeek = new Date(newStartOfWeek);
+        newEndOfWeek.setDate(newStartOfWeek.getDate() + 6); // Set to Sunday
+
+        if (currentWeek && (date < currentWeek.start || date > currentWeek.end)) {
+            console.log(`Week changed from ${currentWeek.start.toDateString()} to ${currentWeek.end.toDateString()} to ${newStartOfWeek.toDateString()} to ${newEndOfWeek.toDateString()}`);
+            setCurrentWeek({ start: newStartOfWeek, end: newEndOfWeek });
+            setScheduleData(generateSchedule(date));
+        } else {
+            console.log(`Week remains the same: ${currentWeek.start.toDateString()} to ${currentWeek.end.toDateString()}`);
+        }
     };
 
     return (
@@ -121,7 +153,7 @@ export default function Home() {
                 ))}
             </div>
 
-            <CustomDatePicker selectedDate={selectedDate} onChange={(date) => setSelectedDate(date)} />
+            <CustomDatePicker selectedDate={selectedDate} onChange={handleDateChange} />
 
             <div className={`${styles.home__content} ${scheduleData ? styles.home__content_hasSchedule : ""}`}>
                 {scheduleData ? (
