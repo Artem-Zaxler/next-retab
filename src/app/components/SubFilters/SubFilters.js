@@ -1,7 +1,6 @@
 import React from 'react';
 import Select from 'react-select';
 import styles from "./SubFilters.module.scss";
-import "./react-select.css";
 
 const SubFilters = ({ filters, selectedFilter, selectedSubFilter, handleSubFilterClick, subFilters }) => {
     if (selectedFilter === null || selectedFilter >= filters.length) return null;
@@ -9,13 +8,16 @@ const SubFilters = ({ filters, selectedFilter, selectedSubFilter, handleSubFilte
     const options = subFilters ? subFilters.map(subFilter => ({ value: subFilter, label: subFilter })) : [];
 
     return (
-        <div className="sub-filters">
+        <div className={styles.subFilters}>
             <Select
                 value={options.find(option => option.value === selectedSubFilter) || null}
                 onChange={(selectedOption) => handleSubFilterClick(selectedOption ? selectedOption.value : '')}
                 options={options}
                 placeholder="Выберите подфильтр"
-                className="sub-filters__dropdown"
+                theme={(theme) => ({
+                    ...theme,
+                    borderRadius: 10,
+                })}
             />
         </div>
     );
