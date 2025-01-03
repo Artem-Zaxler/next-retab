@@ -1,11 +1,13 @@
 .footer {
   display: flex;
-  align-items: start;
+  align-items: center;
   gap: 16px;
+  margin: auto;
 
   &__title {
-    font-family: 'Roboto', sans-serif;
+    margin: 0 auto;
     font-size: 18px;
     line-height: 20px;
+    font-weight: 400;
   }
 }
