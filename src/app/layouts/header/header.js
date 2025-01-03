@@ -10,14 +10,16 @@ export default function Header() {
         <header>
             <div className={`${stylesLayout.container} ${stylesLayout.container_header}`}>
                 <div className={styles.header}>
-                    <img
-                        className={styles.header__logo}
-                        src={'/images/kgeu-logo.png'}
-                        alt={'kgeu-logo'}
-                    />
-
                     <Link href='/'>
-                        <h1 className={styles.header__title}>Retab</h1>
+                        <div className={styles.header__logoAndTitle}>
+                            <img
+                                className={styles.header__logo}
+                                src={'/images/kgeu-logo.png'}
+                                alt={'kgeu-logo'}
+                            />
+
+                            <span className={styles.header__title}>Retab</span>
+                        </div>
                     </Link>
 
                     <div className={styles.header__links}>

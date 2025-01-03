@@ -3,6 +3,12 @@
   align-items: center;
   gap: 16px;
 
+  &__logoAndTitle {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
   &__logo {
     max-width: 48px;
     max-height: 48px;
@@ -13,6 +19,7 @@
     font-size: 28px;
     line-height: 32px;
     font-weight: 400;
+    color: white;
   }
 
   &__links {

@@ -42,6 +42,7 @@
     font-weight: 400;
     font-size: 15px;
     line-height: 17px;
+    outline: none;
 
     &_active {
       background: white;
@@ -73,34 +74,9 @@
     margin-top: 20px;
     font-size: 20px;
 
-    //& > :nth-child(1),
-    //& > :nth-child(2) {
-    //  border-right: 1px solid white;
-    //  border-bottom: 1px solid white;
-    //}
-    //
-    //& > :nth-child(3) {
-    //  border-bottom: 1px solid white;
-    //}
-    //
-    //& > :nth-child(4),
-    //& > :nth-child(5) {
-    //  border-right: 1px solid white;
-    //}
-
     & > span {
       border: none !important;
       text-shadow: 2px 2px 4px black;
-    }
-
-    &_hasSchedule {
-      //display: grid;
-      //grid-template-columns: 1fr 1fr 1fr;
-      //grid-template-rows: 1fr 1fr;
-      //background: rgba(26, 102, 224, 0.95);
-      //backdrop-filter: blur(5px);
-      //border-radius: 20px;
-      //border: solid white 0.5px;
     }
   }
 }
