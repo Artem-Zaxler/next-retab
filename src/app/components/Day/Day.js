@@ -40,7 +40,7 @@ export default function Day({ day, subjects, isCurrentDay, showAllDays, collapse
             }
         } else if (contentRef.current) {
             contentRef.current.style.maxHeight = '0';
-            contentRef.current.style.padding = '0';
+            contentRef.current.style.padding = '0 20px';
             if (contentLineRef.current) {
                 contentLineRef.current.style.opacity = '0';
             }
