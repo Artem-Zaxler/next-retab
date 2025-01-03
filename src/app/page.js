@@ -88,9 +88,9 @@ export default function Home() {
         setCurrentDay(days[dayOfWeek]);
 
         const startOfWeek = new Date(today);
-        startOfWeek.setDate(today.getDate() - dayOfWeek + 1); // Set to Monday
+        startOfWeek.setDate(today.getDate() - dayOfWeek + 1);
         const endOfWeek = new Date(startOfWeek);
-        endOfWeek.setDate(startOfWeek.getDate() + 6); // Set to Sunday
+        endOfWeek.setDate(startOfWeek.getDate() + 6);
         setCurrentWeek({start: startOfWeek, end: endOfWeek});
 
         console.log(`Current day: ${days[dayOfWeek]}`);
@@ -121,9 +121,9 @@ export default function Home() {
     const handleDateChange = (date) => {
         setSelectedDate(date);
         const newStartOfWeek = new Date(date);
-        newStartOfWeek.setDate(date.getDate() - date.getDay() + 1); // Set to Monday
+        newStartOfWeek.setDate(date.getDate() - date.getDay() + 1);
         const newEndOfWeek = new Date(newStartOfWeek);
-        newEndOfWeek.setDate(newStartOfWeek.getDate() + 6); // Set to Sunday
+        newEndOfWeek.setDate(newStartOfWeek.getDate() + 6);
 
         if (currentWeek && (date < currentWeek.start || date > currentWeek.end)) {
             console.log(`Week changed from ${currentWeek.start.toDateString()} to ${currentWeek.end.toDateString()} to ${newStartOfWeek.toDateString()} to ${newEndOfWeek.toDateString()}`);

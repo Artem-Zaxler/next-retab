@@ -10,6 +10,8 @@ export default function Day({day, subjects, isCurrentDay, showAllDays}) {
     useEffect(() => {
         if (showAllDays || isCurrentDay) {
             setIsOpen(true);
+        } else {
+            setIsOpen(false);
         }
     }, [showAllDays, isCurrentDay]);
 
