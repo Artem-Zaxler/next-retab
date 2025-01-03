@@ -142,14 +142,19 @@
   &__settingsIcon {
     max-width: 24px !important;
     max-height: 24px !important;
+    padding: 10px;
+    background: #1d75d4;
+    border-radius: 10px;
+    border: solid white 0.5px;
     cursor: pointer;
   }
 
   &__settingsDropdown {
     position: absolute;
-    top: 100%;
+    top: 120%;
     left: 0;
     right: 0;
+    min-width: 60vw;
     background: white;
     border: 1px solid #c2c2c2;
     border-radius: 10px;
