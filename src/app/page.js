@@ -79,7 +79,7 @@ export default function Home() {
         };
 
         loadScheduleData();
-    }, [selectedFilter, selectedDate]);
+    }, [selectedFilter]);
 
     useEffect(() => {
         const today = new Date();
