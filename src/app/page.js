@@ -133,6 +133,8 @@ export default function Home() {
         localStorage.setItem('showAllDays', String(newShowAllDays));
     };
 
+    const isCurrentDay = selectedDate >= currentWeek.start && selectedDate <= currentWeek.end;
+
     return (
         <div className={styles.home} style={{paddingTop: `${pagePaddingTop}px`}}>
             <img
@@ -144,13 +146,13 @@ export default function Home() {
             <h1 className={styles.home__title}>Расписание</h1>
 
             <div className={styles.home__filterButtons}>
-                {filters.map((stage, i) => (
+                {filters.map((filter, i) => (
                     <button
                         key={i}
                         className={`${styles.home__filterButton} ${getButtonClassName(i)}`}
                         onClick={() => handleButtonClick(i)}
                     >
-                        {stage.text}
+                        {filter.text}
                     </button>
                 ))}
             </div>
@@ -191,22 +193,40 @@ export default function Home() {
                 {scheduleData ? (
                     <div className={styles.home__columns}>
                         <div className={styles.home__column}>
-                            <Day day="Monday" subjects={scheduleData.Monday} isCurrentDay={currentDay === 'Monday' && selectedDate >= currentWeek.start && selectedDate <= currentWeek.end}
-                                 showAllDays={showAllDays}/>
-                            <Day day="Thursday" subjects={scheduleData.Thursday}
-                                 isCurrentDay={currentDay === 'Thursday' && selectedDate >= currentWeek.start && selectedDate <= currentWeek.end} showAllDays={showAllDays}/>
+                            <Day day="Monday"
+                                 subjects={scheduleData.Monday}
+                                 isCurrentDay={currentDay === 'Monday' && isCurrentDay}
+                                 showAllDays={showAllDays}
+                            />
+                            <Day day="Thursday"
+                                 subjects={scheduleData.Thursday}
+                                 isCurrentDay={currentDay === 'Thursday' && isCurrentDay}
+                                 showAllDays={showAllDays}
+                            />
                         </div>
                         <div className={styles.home__column}>
-                            <Day day="Tuesday" subjects={scheduleData.Tuesday} isCurrentDay={currentDay === 'Tuesday' && selectedDate >= currentWeek.start && selectedDate <= currentWeek.end}
-                                 showAllDays={showAllDays}/>
-                            <Day day="Friday" subjects={scheduleData.Friday} isCurrentDay={currentDay === 'Friday' && selectedDate >= currentWeek.start && selectedDate <= currentWeek.end}
-                                 showAllDays={showAllDays}/>
+                            <Day day="Tuesday"
+                                 subjects={scheduleData.Tuesday}
+                                 isCurrentDay={currentDay === 'Tuesday' && isCurrentDay}
+                                 showAllDays={showAllDays}
+                            />
+                            <Day day="Friday"
+                                 subjects={scheduleData.Friday}
+                                 isCurrentDay={currentDay === 'Friday' && isCurrentDay}
+                                 showAllDays={showAllDays}
+                            />
                         </div>
                         <div className={styles.home__column}>
-                            <Day day="Wednesday" subjects={scheduleData.Wednesday}
-                                 isCurrentDay={currentDay === 'Wednesday' && selectedDate >= currentWeek.start && selectedDate <= currentWeek.end} showAllDays={showAllDays}/>
-                            <Day day="Saturday" subjects={scheduleData.Saturday}
-                                 isCurrentDay={currentDay === 'Saturday' && selectedDate >= currentWeek.start && selectedDate <= currentWeek.end} showAllDays={showAllDays}/>
+                            <Day day="Wednesday"
+                                 subjects={scheduleData.Wednesday}
+                                 isCurrentDay={currentDay === 'Wednesday' && isCurrentDay}
+                                 showAllDays={showAllDays}
+                            />
+                            <Day day="Saturday"
+                                 subjects={scheduleData.Saturday}
+                                 isCurrentDay={currentDay === 'Saturday' && isCurrentDay}
+                                 showAllDays={showAllDays}
+                            />
                         </div>
                     </div>
                 ) : (
