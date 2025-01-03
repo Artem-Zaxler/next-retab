@@ -17,6 +17,13 @@ const backgrounds = [
     '/images/stage-backgrounds/subject-1.png',
 ];
 
+const mobileBackgrounds = [
+    '/images/stage-backgrounds/mobile/groups-2.png',
+    '/images/stage-backgrounds/mobile/academic-stuff-2.png',
+    '/images/stage-backgrounds/mobile/cabinets-4.png',
+    '/images/stage-backgrounds/mobile/subject-1.png',
+];
+
 const filters = [
     {text: 'По группам', content: 'Расписание для групп', category: 'groups'},
     {text: 'По преподавателям', content: 'Расписание для преподавателей', category: 'teachers'},
@@ -179,7 +186,7 @@ const Home = () => {
     return (
         <div className={styles.home} style={{paddingTop: `${pagePaddingTop}px`}}>
             <img
-                src={backgrounds[index]}
+                src={isMobile ? mobileBackgrounds[index] : backgrounds[index]}
                 alt={'background-image'}
                 className={styles.home__background}
             />
