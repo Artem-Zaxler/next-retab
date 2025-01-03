@@ -1,3 +1,5 @@
+@import "./layout.module";
+
 .home {
   display: flex;
   flex-direction: column;
@@ -6,6 +8,10 @@
   gap: 30px;
   text-align: center;
   transition: 0.5s ease;
+
+  @include media-tablet-and-mobile {
+    gap: 20px;
+  }
 
   &__background {
     position: fixed;
@@ -25,6 +31,10 @@
   &__filterButtons {
     display: flex;
     gap: 10px;
+
+    @include media-tablet-and-mobile {
+      flex-direction: column;
+    }
   }
 
   &__filterButton {
@@ -73,6 +83,10 @@
     font-size: 20px;
     max-width: 80%;
 
+    @include media-tablet-and-mobile {
+      max-width: 100%;
+    }
+
     & > span {
       border: none !important;
       text-shadow: 2px 2px 4px black;
@@ -110,6 +124,12 @@
   &__showAllDaysIcon {
     max-width: 16px !important;
     max-height: 16px !important;
+  }
+
+  &__scheduleColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
 }
 

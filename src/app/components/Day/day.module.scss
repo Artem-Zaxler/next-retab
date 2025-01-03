@@ -1,3 +1,5 @@
+@import "../../layout.module";
+
 .day {
   display: flex;
   flex-direction: column;
@@ -16,6 +18,10 @@
     color: white;
     min-width: 15vw;
     cursor: pointer;
+
+    @include media-tablet-and-mobile {
+      padding: 10px 10px 10px 20px;
+    }
   }
 
   &__contentLine {

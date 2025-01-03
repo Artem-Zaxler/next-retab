@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './page.module.scss';
 import Day from "./components/Day/Day";
 import CustomDatePicker from './components/DatePicker/DatePicker';
-import { generateSchedule } from '../utils/scheduleGenerator';
+import {generateSchedule} from '../utils/scheduleGenerator';
+import useMedia from "../hooks/useMedia";
 
 const backgrounds = [
     '/images/stage-backgrounds/groups-2.png',
@@ -14,10 +15,10 @@ const backgrounds = [
 ];
 
 const filters = [
-    { text: 'По группам', content: 'Расписание для групп' },
-    { text: 'По преподавателям', content: 'Расписание для преподавателей' },
-    { text: 'По кабинетам', content: 'Расписание по кабинетам' },
-    { text: 'По предмету', content: 'Расписание по предмету' },
+    {text: 'По группам', content: 'Расписание для групп'},
+    {text: 'По преподавателям', content: 'Расписание для преподавателей'},
+    {text: 'По кабинетам', content: 'Расписание по кабинетам'},
+    {text: 'По предмету', content: 'Расписание по предмету'},
 ];
 
 const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -28,13 +29,16 @@ const Home = () => {
     const [selectedFilter, setSelectedFilter] = useState(null);
     const [scheduleData, setScheduleData] = useState(null);
     const [isAnimating, setIsAnimating] = useState(true);
-    const [pagePaddingTop, setPagePaddingTop] = useState(150);
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [currentDay, setCurrentDay] = useState(null);
     const [currentWeek, setCurrentWeek] = useState(null);
     const [showAllDays, setShowAllDays] = useState(false);
     const [collapseStates, setCollapseStates] = useState({});
     const [expandStates, setExpandStates] = useState({});
+
+    const {isMobile} = useMedia();
+
+    const [pagePaddingTop, setPagePaddingTop] = useState(isMobile ? 15 : 150);
 
     useEffect(() => {
         const savedFilter = localStorage.getItem('selectedScheduleFilter');
@@ -44,12 +48,12 @@ const Home = () => {
             setActiveStage(parseInt(savedFilter, 10));
             setIndex(parseInt(savedFilter, 10));
             setIsAnimating(false);
-            setPagePaddingTop(150);
+            setPagePaddingTop(isMobile ? 15 : 150);
         } else {
-            setPagePaddingTop(300);
+            setPagePaddingTop(isMobile ? 30 : 300);
         }
         setShowAllDays(savedShowAllDays);
-    }, []);
+    }, [isMobile]);
 
     useEffect(() => {
         if (isAnimating) {
@@ -94,7 +98,7 @@ const Home = () => {
         startOfWeek.setDate(today.getDate() - dayOfWeek + 1);
         const endOfWeek = new Date(startOfWeek);
         endOfWeek.setDate(startOfWeek.getDate() + 6);
-        setCurrentWeek({ start: startOfWeek, end: endOfWeek });
+        setCurrentWeek({start: startOfWeek, end: endOfWeek});
     }, []);
 
     const handleButtonClick = (stageIndex) => {
@@ -141,7 +145,7 @@ const Home = () => {
             setExpandStates(newExpandStates);
 
             setTimeout(() => {
-                setCurrentWeek({ start: newStartOfWeek, end: newEndOfWeek });
+                setCurrentWeek({start: newStartOfWeek, end: newEndOfWeek});
                 const newScheduleData = generateSchedule(date);
                 setScheduleData(newScheduleData);
 
@@ -166,7 +170,7 @@ const Home = () => {
     }
 
     return (
-        <div className={styles.home} style={{ paddingTop: `${pagePaddingTop}px` }}>
+        <div className={styles.home} style={{paddingTop: `${pagePaddingTop}px`}}>
             <img
                 src={backgrounds[index]}
                 alt={'background-image'}
@@ -188,7 +192,7 @@ const Home = () => {
             </div>
             {scheduleData &&
                 <>
-                    <CustomDatePicker selectedDate={selectedDate} onChange={handleDateChange} />
+                    <CustomDatePicker selectedDate={selectedDate} onChange={handleDateChange}/>
 
                     <div className={styles.home__showAllDays} onClick={handleShowAllDaysChange}>
                         <input
@@ -221,8 +225,65 @@ const Home = () => {
 
             <div className={styles.home__content}>
                 {scheduleData ? (
-                    <div className={styles.home__columns}>
-                        <div className={styles.home__column}>
+                    !isMobile ? (
+                        <div className={styles.home__columns}>
+                            <div className={styles.home__column}>
+                                <Day
+                                    day="Monday"
+                                    subjects={scheduleData.Monday}
+                                    isCurrentDay={currentDay === 'Monday' && getIsCurrentDay()}
+                                    showAllDays={showAllDays}
+                                    collapse={collapseStates.Monday}
+                                    expand={expandStates.Monday}
+                                />
+                                <Day
+                                    day="Thursday"
+                                    subjects={scheduleData.Thursday}
+                                    isCurrentDay={currentDay === 'Thursday' && getIsCurrentDay()}
+                                    showAllDays={showAllDays}
+                                    collapse={collapseStates.Thursday}
+                                    expand={expandStates.Thursday}
+                                />
+                            </div>
+                            <div className={styles.home__column}>
+                                <Day
+                                    day="Tuesday"
+                                    subjects={scheduleData.Tuesday}
+                                    isCurrentDay={currentDay === 'Tuesday' && getIsCurrentDay()}
+                                    showAllDays={showAllDays}
+                                    collapse={collapseStates.Tuesday}
+                                    expand={expandStates.Tuesday}
+                                />
+                                <Day
+                                    day="Friday"
+                                    subjects={scheduleData.Friday}
+                                    isCurrentDay={currentDay === 'Friday' && getIsCurrentDay()}
+                                    showAllDays={showAllDays}
+                                    collapse={collapseStates.Friday}
+                                    expand={expandStates.Friday}
+                                />
+                            </div>
+                            <div className={styles.home__column}>
+                                <Day
+                                    day="Wednesday"
+                                    subjects={scheduleData.Wednesday}
+                                    isCurrentDay={currentDay === 'Wednesday' && getIsCurrentDay()}
+                                    showAllDays={showAllDays}
+                                    collapse={collapseStates.Wednesday}
+                                    expand={expandStates.Wednesday}
+                                />
+                                <Day
+                                    day="Saturday"
+                                    subjects={scheduleData.Saturday}
+                                    isCurrentDay={currentDay === 'Saturday' && getIsCurrentDay()}
+                                    showAllDays={showAllDays}
+                                    collapse={collapseStates.Saturday}
+                                    expand={expandStates.Saturday}
+                                />
+                            </div>
+                        </div>
+                    ) : (
+                        <div className={styles.home__scheduleColumn}>
                             <Day
                                 day="Monday"
                                 subjects={scheduleData.Monday}
@@ -232,16 +293,6 @@ const Home = () => {
                                 expand={expandStates.Monday}
                             />
                             <Day
-                                day="Thursday"
-                                subjects={scheduleData.Thursday}
-                                isCurrentDay={currentDay === 'Thursday' && getIsCurrentDay()}
-                                showAllDays={showAllDays}
-                                collapse={collapseStates.Thursday}
-                                expand={expandStates.Thursday}
-                            />
-                        </div>
-                        <div className={styles.home__column}>
-                            <Day
                                 day="Tuesday"
                                 subjects={scheduleData.Tuesday}
                                 isCurrentDay={currentDay === 'Tuesday' && getIsCurrentDay()}
@@ -250,22 +301,28 @@ const Home = () => {
                                 expand={expandStates.Tuesday}
                             />
                             <Day
-                                day="Friday"
-                                subjects={scheduleData.Friday}
-                                isCurrentDay={currentDay === 'Friday' && getIsCurrentDay()}
-                                showAllDays={showAllDays}
-                                collapse={collapseStates.Friday}
-                                expand={expandStates.Friday}
-                            />
-                        </div>
-                        <div className={styles.home__column}>
-                            <Day
                                 day="Wednesday"
                                 subjects={scheduleData.Wednesday}
                                 isCurrentDay={currentDay === 'Wednesday' && getIsCurrentDay()}
                                 showAllDays={showAllDays}
                                 collapse={collapseStates.Wednesday}
                                 expand={expandStates.Wednesday}
+                            />
+                            <Day
+                                day="Thursday"
+                                subjects={scheduleData.Thursday}
+                                isCurrentDay={currentDay === 'Thursday' && getIsCurrentDay()}
+                                showAllDays={showAllDays}
+                                collapse={collapseStates.Thursday}
+                                expand={expandStates.Thursday}
+                            />
+                            <Day
+                                day="Friday"
+                                subjects={scheduleData.Friday}
+                                isCurrentDay={currentDay === 'Friday' && getIsCurrentDay()}
+                                showAllDays={showAllDays}
+                                collapse={collapseStates.Friday}
+                                expand={expandStates.Friday}
                             />
                             <Day
                                 day="Saturday"
@@ -276,7 +333,7 @@ const Home = () => {
                                 expand={expandStates.Saturday}
                             />
                         </div>
-                    </div>
+                    )
                 ) : (
                     <span>Пожалуйста, выберите фильтр расписания</span>
                 )}
