@@ -57,14 +57,17 @@ export default function Day({day, subjects, isCurrentDay}) {
                 <>
                     <div className={styles.day__contentLine}></div>
                     <div className={styles.day__content}>
-                        {subjects.map((item, idx) => (
-                            <Subject
-                                key={idx}
-                                subject={item.subject}
-                                cabinet={item.cabinet}
-                                teacher={item.teacher}
-                            />
-                        ))}
+                        {subjects.length > 0 ? (
+                            subjects.map((item, idx) => (
+                                <Subject
+                                    key={idx}
+                                    subject={item.subject}
+                                    cabinet={item.cabinet}
+                                    teacher={item.teacher}
+                                />
+                            ))) : (
+                            <span>Отдыхаем сегодня</span>
+                        )}
                     </div>
                 </>
             )}
