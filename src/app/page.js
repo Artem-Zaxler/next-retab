@@ -26,7 +26,7 @@ export default function Home() {
     const [selectedFilter, setSelectedFilter] = useState(null);
     const [scheduleData, setScheduleData] = useState(null);
     const [isAnimating, setIsAnimating] = useState(true);
-    const [pagePaddingTop, setPagePaddingTop] = useState(50);
+    const [pagePaddingTop, setPagePaddingTop] = useState(150);
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [currentDay, setCurrentDay] = useState(null);
     const [currentWeek, setCurrentWeek] = useState(null);
@@ -40,9 +40,9 @@ export default function Home() {
             setActiveStage(parseInt(savedFilter, 10));
             setIndex(parseInt(savedFilter, 10));
             setIsAnimating(false);
-            setPagePaddingTop(50);
+            setPagePaddingTop(150);
         } else {
-            setPagePaddingTop(200);
+            setPagePaddingTop(300);
         }
         setShowAllDays(savedShowAllDays);
     }, []);
