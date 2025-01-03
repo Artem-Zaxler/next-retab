@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
+'use client';
+
+import React, {useEffect, useState} from 'react';
 import Subject from '../Subject/Subject';
 import styles from "./day.module.scss";
 
-export default function Day ({ day, subjects }) {
+export default function Day({day, subjects}) {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleOpen = () => {
         setIsOpen(!isOpen);
     };
+
+    useEffect(() => {
+        console.log(isOpen)
+    }, [isOpen]);
 
     return (
         <div className={styles.day}>
@@ -18,21 +24,24 @@ export default function Day ({ day, subjects }) {
                     src={'/svg/arrow.svg'}
                     alt={'arrow'}
                     className={styles.day__arrow}
-                    style={{ transform: isOpen ? 'rotate(0deg)' : 'rotate(-90deg)' }}
+                    style={{transform: isOpen ? 'rotate(0deg)' : 'rotate(-90deg)'}}
                 />
             </div>
 
             {isOpen && (
-                <div className={styles.day__content}>
-                    {subjects.map((item, idx) => (
-                        <Subject
-                            key={idx}
-                            subject={item.subject}
-                            cabinet={item.cabinet}
-                            teacher={item.teacher}
-                        />
-                    ))}
-                </div>
+                <>
+                    <div className={styles.day__contentLine}></div>
+                    <div className={styles.day__content}>
+                        {subjects.map((item, idx) => (
+                            <Subject
+                                key={idx}
+                                subject={item.subject}
+                                cabinet={item.cabinet}
+                                teacher={item.teacher}
+                            />
+                        ))}
+                    </div>
+                </>
             )}
         </div>
     );

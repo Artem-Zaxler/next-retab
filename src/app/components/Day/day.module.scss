@@ -2,6 +2,11 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  background: rgba(26, 102, 224, 0.95);
+  backdrop-filter: blur(5px);
+  border-radius: 20px;
+  border: solid white 0.5px;
+  transition: 0.3s ease-in-out;
 
   &__panel {
     display: flex;
@@ -12,6 +17,13 @@
     color: white;
     width: 20vw;
     cursor: pointer;
+  }
+
+  &__contentLine {
+    background: linear-gradient(to left, transparent, white, white, transparent);
+    height: 1px;
+    width: 90%;
+    margin: 0 auto;
   }
 
   &__title {
