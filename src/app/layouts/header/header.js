@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react';
 import styles from "./header.module.scss";
 import stylesLayout from "../../layout.module.scss";
 import Link from "next/link";
-import {useMedia} from "../../../hooks/useMedia";
+import useMedia from "../../../hooks/useMedia";
 
-export default function Header() {
+const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false);
-
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { isMobile } = useMedia();
 
     useEffect(() => {
@@ -26,10 +26,17 @@ export default function Header() {
         };
     }, []);
 
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+    useEffect(() => {
+        console.log(isMobile)
+    }, [isMobile]);
+
     return (
         <header>
             <div
-                className={`${stylesLayout.container} ${stylesLayout.container_header} 
+                className={`${stylesLayout.container} ${stylesLayout.container_header}
                     ${isScrolled ? stylesLayout.container_header_scrolled : ''}`}
             >
                 <div className={styles.header}>
@@ -43,17 +50,38 @@ export default function Header() {
                             <span className={styles.header__title}>Retab</span>
                         </div>
                     </Link>
-                    <div className={styles.header__links}>
-                        <Link href={'/profile'}>
-                            <span className={styles.header__link}>Личный кабинет</span>
-                        </Link>
-
-                        <Link href={'/'}>
-                            <span className={styles.header__link}>Расписание</span>
-                        </Link>
-                    </div>
+                    {isMobile ? (
+                        <>
+                            <div className={styles.header__burger} onClick={toggleMenu}>
+                                <span className={styles.header__burgerLine}></span>
+                                <span className={styles.header__burgerLine}></span>
+                                <span className={styles.header__burgerLine}></span>
+                            </div>
+                            {isMenuOpen && (
+                                <div className={styles.header__mobileMenu}>
+                                    <Link href={'/profile'}>
+                                        <span className={styles.header__link}>Личный кабинет</span>
+                                    </Link>
+                                    <Link href={'/'}>
+                                        <span className={styles.header__link}>Расписание</span>
+                                    </Link>
+                                </div>
+                            )}
+                        </>
+                    ) : (
+                        <div className={styles.header__links}>
+                            <Link href={'/profile'}>
+                                <span className={styles.header__link}>Личный кабинет</span>
+                            </Link>
+                            <Link href={'/'}>
+                                <span className={styles.header__link}>Расписание</span>
+                            </Link>
+                        </div>
+                    )}
                 </div>
             </div>
         </header>
     );
 }
+
+export default Header;

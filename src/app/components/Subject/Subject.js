@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from "./subject.module.scss";
 
-export default function Subject ({ subject, cabinet, teacher, isToday }) {
+const Subject = ({ subject, cabinet, teacher, isToday }) => {
     return (
         <div className={`${styles.subject} ${isToday ? styles.subject_today : ''}`}>
             <span className={styles.subject__title}>{subject}</span>
@@ -14,3 +14,5 @@ export default function Subject ({ subject, cabinet, teacher, isToday }) {
         </div>
     );
 };
+
+export default Subject;

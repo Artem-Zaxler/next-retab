@@ -1,7 +1,7 @@
 import styles from "./footer.module.scss";
 import stylesLayout from "../../layout.module.scss";
 
-export default function Footer() {
+const Footer = () => {
     return (
         <footer>
             <div className={`${stylesLayout.container} ${stylesLayout.container_footer}`}>
@@ -12,3 +12,5 @@ export default function Footer() {
         </footer>
     );
 }
+
+export default Footer;

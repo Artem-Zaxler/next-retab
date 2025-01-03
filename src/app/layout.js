@@ -3,8 +3,7 @@ import Header from "./layouts/header/header";
 import Footer from "./layouts/footer/footer";
 import styles from "./layout.module.scss";
 
-export default function RootLayout({children}) {
-
+const RootLayout = ({children}) => {
     return (
         <html lang="ru">
         <body>
@@ -19,3 +18,5 @@ export default function RootLayout({children}) {
         </html>
     );
 }
+
+export default RootLayout;

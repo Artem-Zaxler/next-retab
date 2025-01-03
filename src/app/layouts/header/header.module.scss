@@ -49,6 +49,38 @@
     color: white;
   }
 
+  &__burger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+
+    @include media-tablet-and-mobile {
+      display: flex;
+    }
+  }
+
+  &__burgerLine {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 4px 0;
+  }
+
+  &__mobileMenu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    gap: 20px;
+
+    @include media-tablet-and-mobile {
+      display: flex;
+    }
+  }
+
   a {
     text-decoration: none;
   }

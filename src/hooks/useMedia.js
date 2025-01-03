@@ -1,27 +1,34 @@
-'use client'
-import { useEffect, useState } from "react";
+import { useState, useEffect } from 'react';
 
-export const useMedia = () => {
-  const [windowWidth, setWindowWidth] = useState();
+const useMedia = () => {
+  const [deviceType, setDeviceType] = useState({
+    isDesktop: false,
+    isTablet: false,
+    isMobile: false,
+  });
 
   useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
+    const updateDeviceType = () => {
+      const width = window.innerWidth;
+      if (width > 1024) {
+        setDeviceType({ isDesktop: true, isTablet: false, isMobile: false });
+      } else if (width >= 480 && width <= 1024) {
+        setDeviceType({ isDesktop: false, isTablet: true, isMobile: false });
+      } else if (width < 480) {
+        setDeviceType({ isDesktop: false, isTablet: false, isMobile: true });
+      }
     };
 
-    window.addEventListener("resize", handleResize);
+    updateDeviceType();
+
+    window.addEventListener('resize', updateDeviceType);
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener('resize', updateDeviceType);
     };
   }, []);
 
-  useEffect(() => {
-    setWindowWidth(window.innerWidth);
-  }, [typeof window]);
-
-  const isMobile = windowWidth < 480;
-  const isDesktop = !isMobile;
-
-  return { isDesktop, isMobile };
+  return deviceType;
 };
+
+export default useMedia;

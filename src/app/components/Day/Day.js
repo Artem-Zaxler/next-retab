@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import Subject from '../Subject/Subject';
 import styles from "./day.module.scss";
 
-export default function Day({ day, subjects, isCurrentDay, showAllDays, collapse, expand }) {
+const Day = ({ day, subjects, isCurrentDay, showAllDays, collapse, expand }) => {
     const [isOpen, setIsOpen] = useState(false);
     const contentRef = useRef(null);
     const contentLineRef = useRef(null);
@@ -106,3 +106,5 @@ export default function Day({ day, subjects, isCurrentDay, showAllDays, collapse
         </div>
     );
 };
+
+export default Day;

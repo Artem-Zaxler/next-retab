@@ -22,7 +22,7 @@ const filters = [
 
 const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-export default function Home() {
+const Home = () => {
     const [index, setIndex] = useState(0);
     const [activeStage, setActiveStage] = useState(0);
     const [selectedFilter, setSelectedFilter] = useState(null);
@@ -284,3 +284,5 @@ export default function Home() {
         </div>
     );
 }
+
+export default Home;
