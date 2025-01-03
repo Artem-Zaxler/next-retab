@@ -137,7 +137,7 @@ export default function Home() {
     const handleShowAllDaysChange = () => {
         const newShowAllDays = !showAllDays;
         setShowAllDays(newShowAllDays);
-        localStorage.setItem('showAllDays', newShowAllDays);
+        localStorage.setItem('showAllDays', String(newShowAllDays));
     };
 
     return (
@@ -194,7 +194,7 @@ export default function Home() {
                 </>
             }
 
-            <div className={`${styles.home__content} ${scheduleData ? styles.home__content_hasSchedule : ""}`}>
+            <div className={styles.home__content}>
                 {scheduleData ? (
                     <div className={styles.home__columns}>
                         <div className={styles.home__column}>
