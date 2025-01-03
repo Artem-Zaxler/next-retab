@@ -8,7 +8,7 @@ import useMedia from "../hooks/useMedia";
 import FilterButtons from './components/FilterButtons/FilterButtons';
 import SubFilters from './components/SubFilters/SubFilters';
 import Schedule from './components/Schedule/Schedule';
-import {generateSubFilters} from '../utils/subFilterGenerator'; // Import the new module
+import {generateSubFilters} from '../utils/subFilterGenerator';
 
 const backgrounds = [
     '/images/stage-backgrounds/groups-2.png',
