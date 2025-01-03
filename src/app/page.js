@@ -8,6 +8,7 @@ import useMedia from "../hooks/useMedia";
 import FilterButtons from './components/FilterButtons/FilterButtons';
 import SubFilters from './components/SubFilters/SubFilters';
 import Schedule from './components/Schedule/Schedule';
+import { generateSubFilters } from '../utils/subFilterGenerator'; // Import the new module
 
 const backgrounds = [
     '/images/stage-backgrounds/groups-2.png',
@@ -17,10 +18,10 @@ const backgrounds = [
 ];
 
 const filters = [
-    { text: 'По группам', content: 'Расписание для групп', subFilters: ['ТРП-2-21', 'ПЭ-1-20'] },
-    { text: 'По преподавателям', content: 'Расписание для преподавателей', subFilters: ['Иванов И. И.', 'Петров П. П.'] },
-    { text: 'По кабинетам', content: 'Расписание по кабинетам', subFilters: ['В-113', 'Г-214'] },
-    { text: 'По предмету', content: 'Расписание по предмету', subFilters: ['Java-технологии', 'Программные методы обработки изображений и распознавания образов'] },
+    { text: 'По группам', content: 'Расписание для групп', category: 'groups' },
+    { text: 'По преподавателям', content: 'Расписание для преподавателей', category: 'teachers' },
+    { text: 'По кабинетам', content: 'Расписание по кабинетам', category: 'rooms' },
+    { text: 'По предмету', content: 'Расписание по предмету', category: 'subjects' },
 ];
 
 const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -39,6 +40,7 @@ const Home = () => {
     const [collapseStates, setCollapseStates] = useState({});
     const [expandStates, setExpandStates] = useState({});
     const [showSettings, setShowSettings] = useState(false);
+    const [subFilters, setSubFilters] = useState([]); // State to hold dynamically generated sub-filters
 
     const { isMobile } = useMedia();
 
@@ -97,6 +99,14 @@ const Home = () => {
         endOfWeek.setDate(startOfWeek.getDate() + 6);
         setCurrentWeek({ start: startOfWeek, end: endOfWeek });
     }, []);
+
+    useEffect(() => {
+        if (selectedFilter !== null) {
+            const category = filters[selectedFilter].category;
+            const generatedSubFilters = generateSubFilters(category);
+            setSubFilters(generatedSubFilters);
+        }
+    }, [selectedFilter]);
 
     const handleButtonClick = (stageIndex) => {
         setActiveStage(stageIndex);
@@ -198,6 +208,7 @@ const Home = () => {
                                     selectedFilter={selectedFilter}
                                     selectedSubFilter={selectedSubFilter}
                                     handleSubFilterClick={handleSubFilterClick}
+                                    subFilters={subFilters} // Pass the dynamically generated sub-filters
                                 />
                             )}
                             <div className={styles.home__showAllDays} onClick={handleShowAllDaysChange}>
@@ -244,6 +255,7 @@ const Home = () => {
                             selectedFilter={selectedFilter}
                             selectedSubFilter={selectedSubFilter}
                             handleSubFilterClick={handleSubFilterClick}
+                            subFilters={subFilters} // Pass the dynamically generated sub-filters
                         />
                     )}
                     {scheduleData &&

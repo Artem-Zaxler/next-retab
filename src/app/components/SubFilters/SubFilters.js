@@ -1,21 +1,22 @@
 import React from 'react';
-import styles from './SubFilters.module.scss';
 
-const SubFilters = ({filters, selectedFilter, selectedSubFilter, handleSubFilterClick}) => {
+const SubFilters = ({ filters, selectedFilter, selectedSubFilter, handleSubFilterClick, subFilters }) => {
+    if (selectedFilter === null || selectedFilter >= filters.length) return null;
+
     return (
-        <div className={styles.subFilters}>
-            {filters[selectedFilter].subFilters.map((subFilter, j) => (
-                <button
-                    key={j}
-                    className={`${styles.subFilters__button} 
-                    ${selectedSubFilter === subFilter ? 
-                        styles.subFilters__button_active : 
-                        styles.subFilters__button_inactive}`}
-                    onClick={() => handleSubFilterClick(subFilter)}
-                >
-                    {subFilter}
-                </button>
-            ))}
+        <div className="sub-filters">
+            <select
+                value={selectedSubFilter || ''}
+                onChange={(e) => handleSubFilterClick(e.target.value)}
+                className="sub-filters__dropdown"
+            >
+                <option value="" disabled>Выберите подфильтр</option>
+                {subFilters && subFilters.map((subFilter, index) => (
+                    <option key={index} value={subFilter}>
+                        {subFilter}
+                    </option>
+                ))}
+            </select>
         </div>
     );
 };
