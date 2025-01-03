@@ -20,6 +20,8 @@ const filters = [
     { text: 'По предмету', content: 'Расписание по предмету' },
 ];
 
+const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
 export default function Home() {
     const [index, setIndex] = useState(0);
     const [activeStage, setActiveStage] = useState(0);
@@ -31,8 +33,8 @@ export default function Home() {
     const [currentDay, setCurrentDay] = useState(null);
     const [currentWeek, setCurrentWeek] = useState(null);
     const [showAllDays, setShowAllDays] = useState(false);
-    const [collapse, setCollapse] = useState(false);
-    const [expand, setExpand] = useState(false);
+    const [collapseStates, setCollapseStates] = useState({});
+    const [expandStates, setExpandStates] = useState({});
 
     useEffect(() => {
         const savedFilter = localStorage.getItem('selectedScheduleFilter');
@@ -86,8 +88,7 @@ export default function Home() {
     useEffect(() => {
         const today = new Date();
         const dayOfWeek = today.getDay();
-        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        setCurrentDay(days[dayOfWeek]);
+        setCurrentDay(daysOfWeek[dayOfWeek]);
 
         const startOfWeek = new Date(today);
         startOfWeek.setDate(today.getDate() - dayOfWeek + 1);
@@ -123,7 +124,21 @@ export default function Home() {
         newEndOfWeek.setDate(newStartOfWeek.getDate() + 6);
 
         if (currentWeek && (date < currentWeek.start || date > currentWeek.end)) {
-            setCollapse(true);
+            const newCollapseStates = {};
+            const newExpandStates = {};
+
+            if (!showAllDays) {
+                daysOfWeek.forEach(day => {
+                    newCollapseStates[day] = true;
+                    newExpandStates[day] = false;
+                });
+
+                newCollapseStates[daysOfWeek[dayOfWeek]] = false;
+                newExpandStates[daysOfWeek[dayOfWeek]] = true;
+            }
+
+            setCollapseStates(newCollapseStates);
+            setExpandStates(newExpandStates);
 
             setTimeout(() => {
                 setCurrentWeek({ start: newStartOfWeek, end: newEndOfWeek });
@@ -131,21 +146,14 @@ export default function Home() {
                 setScheduleData(newScheduleData);
 
                 setTimeout(() => {
-                    setCollapse(false);
-                    setExpand(true);
-
-                    setTimeout(() => {
-                        setExpand(false);
-                    }, 500);
-                }, 1);
+                    setCollapseStates({});
+                    setExpandStates({});
+                }, 500);
             }, 500);
         }
 
-
-        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        setCurrentDay(days[dayOfWeek]);
+        setCurrentDay(daysOfWeek[dayOfWeek]);
     };
-
 
     const handleShowAllDaysChange = () => {
         const newShowAllDays = !showAllDays;
@@ -220,16 +228,16 @@ export default function Home() {
                                 subjects={scheduleData.Monday}
                                 isCurrentDay={currentDay === 'Monday' && getIsCurrentDay()}
                                 showAllDays={showAllDays}
-                                collapse={collapse}
-                                expand={expand}
+                                collapse={collapseStates.Monday}
+                                expand={expandStates.Monday}
                             />
                             <Day
                                 day="Thursday"
                                 subjects={scheduleData.Thursday}
                                 isCurrentDay={currentDay === 'Thursday' && getIsCurrentDay()}
                                 showAllDays={showAllDays}
-                                collapse={collapse}
-                                expand={expand}
+                                collapse={collapseStates.Thursday}
+                                expand={expandStates.Thursday}
                             />
                         </div>
                         <div className={styles.home__column}>
@@ -238,16 +246,16 @@ export default function Home() {
                                 subjects={scheduleData.Tuesday}
                                 isCurrentDay={currentDay === 'Tuesday' && getIsCurrentDay()}
                                 showAllDays={showAllDays}
-                                collapse={collapse}
-                                expand={expand}
+                                collapse={collapseStates.Tuesday}
+                                expand={expandStates.Tuesday}
                             />
                             <Day
                                 day="Friday"
                                 subjects={scheduleData.Friday}
                                 isCurrentDay={currentDay === 'Friday' && getIsCurrentDay()}
                                 showAllDays={showAllDays}
-                                collapse={collapse}
-                                expand={expand}
+                                collapse={collapseStates.Friday}
+                                expand={expandStates.Friday}
                             />
                         </div>
                         <div className={styles.home__column}>
@@ -256,16 +264,16 @@ export default function Home() {
                                 subjects={scheduleData.Wednesday}
                                 isCurrentDay={currentDay === 'Wednesday' && getIsCurrentDay()}
                                 showAllDays={showAllDays}
-                                collapse={collapse}
-                                expand={expand}
+                                collapse={collapseStates.Wednesday}
+                                expand={expandStates.Wednesday}
                             />
                             <Day
                                 day="Saturday"
                                 subjects={scheduleData.Saturday}
                                 isCurrentDay={currentDay === 'Saturday' && getIsCurrentDay()}
                                 showAllDays={showAllDays}
-                                collapse={collapse}
-                                expand={expand}
+                                collapse={collapseStates.Saturday}
+                                expand={expandStates.Saturday}
                             />
                         </div>
                     </div>
