@@ -80,7 +80,7 @@ const Home = () => {
         };
 
         loadScheduleData();
-    }, [selectedFilter, selectedSubFilter, selectedDate]);
+    }, [selectedFilter, selectedSubFilter]);
 
     useEffect(() => {
         const today = new Date();
@@ -145,9 +145,9 @@ const Home = () => {
                     setExpandStates({});
                 }, 500);
             }, 500);
+        } else {
+            setCurrentDay(daysOfWeek[dayOfWeek]);
         }
-
-        setCurrentDay(daysOfWeek[dayOfWeek]);
     };
 
     const handleShowAllDaysChange = () => {
