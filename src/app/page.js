@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import styles from './page.module.scss';
-import Schedule from './components/Schedule/Schedule';
+import Day from "./components/Day/Day";
 
 const backgrounds = [
     '/images/stage-backgrounds/groups-2.png',
@@ -118,7 +118,20 @@ export default function Home() {
 
             <div className={`${styles.home__content} ${scheduleData ? styles.home__content_hasSchedule : ""}`}>
                 {scheduleData ? (
-                    <Schedule schedule={scheduleData} />
+                    <div className={styles.home__columns}>
+                        <div className={styles.home__column}>
+                            <Day day="Monday" subjects={scheduleData.Monday} />
+                            <Day day="Thursday" subjects={scheduleData.Thursday} />
+                        </div>
+                        <div className={styles.home__column}>
+                            <Day day="Tuesday" subjects={scheduleData.Tuesday} />
+                            <Day day="Friday" subjects={scheduleData.Friday} />
+                        </div>
+                        <div className={styles.home__column}>
+                            <Day day="Wednesday" subjects={scheduleData.Wednesday} />
+                            <Day day="Saturday" subjects={scheduleData.Saturday} />
+                        </div>
+                    </div>
                 ) : (
                     <span>Пожалуйста, выберите фильтр расписания</span>
                 )}
