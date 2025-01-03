@@ -1,11 +1,12 @@
 'use client';
 
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import Subject from '../Subject/Subject';
 import styles from "./day.module.scss";
 
 export default function Day({day, subjects, isCurrentDay, showAllDays}) {
     const [isOpen, setIsOpen] = useState(false);
+    const contentRef = useRef(null);
 
     useEffect(() => {
         if (showAllDays || isCurrentDay) {
@@ -14,6 +15,14 @@ export default function Day({day, subjects, isCurrentDay, showAllDays}) {
             setIsOpen(false);
         }
     }, [showAllDays, isCurrentDay]);
+
+    useEffect(() => {
+        if (isOpen && contentRef.current) {
+            contentRef.current.style.maxHeight = `${contentRef.current.scrollHeight}px`;
+        } else if (contentRef.current) {
+            contentRef.current.style.maxHeight = '0';
+        }
+    }, [isOpen]);
 
     const toggleOpen = () => {
         setIsOpen(!isOpen);
@@ -57,25 +66,21 @@ export default function Day({day, subjects, isCurrentDay, showAllDays}) {
                 />
             </div>
 
-            {isOpen && (
-                <>
-                    <div className={styles.day__contentLine}></div>
-                    <div className={styles.day__content}>
-                        {subjects.length > 0 ? (
-                            subjects.map((item, idx) => (
-                                <Subject
-                                    key={idx}
-                                    subject={item.subject}
-                                    cabinet={item.cabinet}
-                                    teacher={item.teacher}
-                                    isToday={isCurrentDay}
-                                />
-                            ))) : (
-                            <span>Отдыхаем сегодня</span>
-                        )}
-                    </div>
-                </>
-            )}
+            <div className={styles.day__contentLine}></div>
+            <div className={styles.day__content} ref={contentRef}>
+                {subjects.length > 0 ? (
+                    subjects.map((item, idx) => (
+                        <Subject
+                            key={idx}
+                            subject={item.subject}
+                            cabinet={item.cabinet}
+                            teacher={item.teacher}
+                            isToday={isCurrentDay}
+                        />
+                    ))) : (
+                    <span>Отдыхаем сегодня</span>
+                )}
+            </div>
         </div>
     );
 };

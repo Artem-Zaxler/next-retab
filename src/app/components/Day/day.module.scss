@@ -34,6 +34,7 @@
     max-width: 32px;
     max-height: 32px;
     user-select: none;
+    transition: 0.3s ease-in-out;
   }
 
   &__content {
@@ -41,6 +42,9 @@
     flex-direction: column;
     gap: 20px;
     padding: 10px 20px 20px;
+    overflow: hidden;
+    transition: max-height 1s ease-in-out;
+    max-height: 0; // Initial state
   }
 
   &_current {
