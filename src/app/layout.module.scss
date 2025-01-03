@@ -3,7 +3,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  padding: 20px 200px;
+  padding: 20px 100px;
 
   @include media-tablet-and-mobile {
     padding: 20px;
