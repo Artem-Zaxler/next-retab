@@ -78,6 +78,9 @@ const Day = ({ day, date, subjects, isCurrentDay, showAllDays, collapse, expand 
 
     const formattedDate = date.toLocaleDateString();
 
+    if (dayName === 'Sunday')
+        return null;
+
     return (
         <div className={`${styles.day} ${isCurrentDay ? styles.day_current : ''}`}>
             <div className={styles.day__panel} onClick={toggleOpen}>
