@@ -32,7 +32,7 @@ const Day = ({ day, date, subjects, isCurrentDay, showAllDays, collapse, expand 
     useEffect(() => {
         if (isOpen && contentRef.current) {
             const padding = 30;
-            const gap = 20 * subjects.length;
+            const gap = 20 * (Array.isArray(subjects) ? subjects.length : 0);
             contentRef.current.style.maxHeight = `${contentRef.current.scrollHeight + padding + gap}px`;
             contentRef.current.style.padding = '10px 20px 20px';
             if (contentLineRef.current) {
@@ -92,7 +92,7 @@ const Day = ({ day, date, subjects, isCurrentDay, showAllDays, collapse, expand 
             </div>
             <div className={styles.day__contentLine} ref={contentLineRef}></div>
             <div className={styles.day__content} ref={contentRef}>
-                {subjects.length > 0 ? (
+                {Array.isArray(subjects) && subjects.length > 0 ? (
                     subjects.map((item, idx) => (
                         <Subject
                             key={idx}

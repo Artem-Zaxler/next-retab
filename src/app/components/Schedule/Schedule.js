@@ -14,6 +14,36 @@ const Schedule = ({ scheduleData, isMobile, currentDay, currentDate, getIsCurren
         return date;
     };
 
+    const getScheduleByDay = (day) => {
+        let customScheduleData;
+
+        switch (day) {
+            case "Monday":
+                customScheduleData = scheduleData.Monday;
+                break;
+            case "Tuesday":
+                customScheduleData = scheduleData.Tuesday;
+                break;
+            case "Wednesday":
+                customScheduleData = scheduleData.Wednesday;
+                break;
+            case "Thursday":
+                customScheduleData = scheduleData.Thursday;
+                break;
+            case "Friday":
+                customScheduleData = scheduleData.Friday;
+                break;
+            case "Saturday":
+                customScheduleData = scheduleData.Saturday;
+                break;
+            default:
+                customScheduleData = null;
+                break;
+        }
+
+        return customScheduleData;
+    }
+
     return (
         <div className={styles.schedule}>
             {!isMobile ? (
@@ -86,7 +116,7 @@ const Schedule = ({ scheduleData, isMobile, currentDay, currentDate, getIsCurren
                             key={index}
                             day={day}
                             date={getDateForDay(day)}
-                            subjects={scheduleData[day]}
+                            subjects={getScheduleByDay(day)}
                             isCurrentDay={currentDay === day && getIsCurrentDay()}
                             showAllDays={showAllDays}
                             collapse={collapseStates[day]}
