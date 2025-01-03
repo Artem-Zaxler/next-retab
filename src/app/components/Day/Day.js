@@ -1,15 +1,17 @@
 'use client';
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import Subject from '../Subject/Subject';
 import styles from "./day.module.scss";
+import useMedia from "../../../hooks/useMedia";
 
-const Day = ({ day, date, subjects, isCurrentDay, showAllDays, collapse, expand }) => {
+const Day = ({day, date, subjects, isCurrentDay, showAllDays, collapse, expand}) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isContentLoaded, setIsContentLoaded] = useState(false);
     const contentRef = useRef(null);
     const contentLineRef = useRef(null);
     const currentDayRef = useRef(null);
+    const {isMobile} = useMedia();
 
     useEffect(() => {
         if (showAllDays || isCurrentDay) {
@@ -92,14 +94,14 @@ const Day = ({ day, date, subjects, isCurrentDay, showAllDays, collapse, expand 
     }, []);
 
     useEffect(() => {
-        if (isCurrentDay && isContentLoaded && currentDayRef.current) {
+        if (isMobile && isCurrentDay && isContentLoaded && currentDayRef.current) {
             requestAnimationFrame(() => {
                 const currentScrollY = window.scrollY;
                 const targetScrollY = currentDayRef.current.getBoundingClientRect().top + window.scrollY;
-                currentDayRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                currentDayRef.current.scrollIntoView({behavior: 'smooth', block: 'start'});
             });
         }
-    }, [isCurrentDay, isContentLoaded]);
+    }, [isMobile, isCurrentDay, isContentLoaded]);
 
     return (
         <div className={`${styles.day} ${isCurrentDay ? styles.day_current : ''}`} ref={currentDayRef}>
@@ -110,7 +112,7 @@ const Day = ({ day, date, subjects, isCurrentDay, showAllDays, collapse, expand 
                     src={'/svg/arrow.svg'}
                     alt={'arrow'}
                     className={styles.day__arrow}
-                    style={{ transform: isOpen ? 'rotate(0deg)' : 'rotate(-90deg)' }}
+                    style={{transform: isOpen ? 'rotate(0deg)' : 'rotate(-90deg)'}}
                 />
             </div>
             <div className={styles.day__contentLine} ref={contentLineRef}></div>
