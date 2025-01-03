@@ -201,13 +201,13 @@ const Home = () => {
                         {showAllDays ? (
                             <img
                                 src={'/svg/checkmark.svg'}
-                                alt={'arrow'}
+                                alt={'checkmark'}
                                 className={styles.home__showAllDaysIcon}
                             />
                         ) : (
                             <img
                                 src={'/svg/cross.svg'}
-                                alt={'arrow'}
+                                alt={'cross'}
                                 className={styles.home__showAllDaysIcon}
                             />
                         )}

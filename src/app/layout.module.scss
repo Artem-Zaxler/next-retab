@@ -22,13 +22,21 @@
     transition: 0.3s ease-in-out;
 
     @include media-tablet-and-mobile {
-      height: 25px;
+      height: 30px;
+      bottom: 0;
+      padding: 15px;
+      width: calc(100% - 30px);
     }
 
     &_scrolled {
       background: rgba(26, 102, 224, 0.8);
       backdrop-filter: blur(8px);
       border-bottom: solid white 0.5px;
+
+      @include media-tablet-and-mobile {
+        border-bottom: none;
+        border-top: solid white 0.5px;
+      }
     }
   }
 
