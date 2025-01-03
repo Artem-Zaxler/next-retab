@@ -35,6 +35,7 @@ const Home = () => {
     const [showAllDays, setShowAllDays] = useState(false);
     const [collapseStates, setCollapseStates] = useState({});
     const [expandStates, setExpandStates] = useState({});
+    const [showSettings, setShowSettings] = useState(false);
 
     const {isMobile} = useMedia();
 
@@ -56,7 +57,7 @@ const Home = () => {
     }, [isMobile]);
 
     useEffect(() => {
-        if (isAnimating) {
+        if (!isMobile && isAnimating) {
             const timer = setTimeout(() => {
                 setIndex((prevIndex) => (prevIndex + 1) % backgrounds.length);
                 setActiveStage((prevStage) => (prevStage + 1) % filters.length);
@@ -64,7 +65,7 @@ const Home = () => {
 
             return () => clearTimeout(timer);
         }
-    }, [index, activeStage, isAnimating]);
+    }, [index, activeStage, isAnimating, isMobile]);
 
     useEffect(() => {
         const loadScheduleData = async () => {
@@ -179,49 +180,104 @@ const Home = () => {
 
             <h1 className={styles.home__title}>Расписание</h1>
 
-            <div className={styles.home__filterButtons}>
-                {filters.map((filter, i) => (
-                    <button
-                        key={i}
-                        className={`${styles.home__filterButton} ${getButtonClassName(i)}`}
-                        onClick={() => handleButtonClick(i)}
-                    >
-                        {filter.text}
-                    </button>
-                ))}
-            </div>
-            {scheduleData &&
-                <>
+            {isMobile ? (
+                <div className={styles.home__mobileSettings}>
+                    <img
+                        src={'/svg/settings.svg'}
+                        alt={'settings'}
+                        className={styles.home__settingsIcon}
+                        onClick={() => setShowSettings(!showSettings)}
+                    />
+                    {showSettings && (
+                        <div className={styles.home__settingsDropdown}>
+                            <div className={styles.home__filterButtons}>
+                                {filters.map((filter, i) => (
+                                    <button
+                                        key={i}
+                                        className={`${styles.home__filterButton} ${getButtonClassName(i)}`}
+                                        onClick={() => handleButtonClick(i)}
+                                    >
+                                        {filter.text}
+                                    </button>
+                                ))}
+                            </div>
+                            <div className={styles.home__showAllDays} onClick={handleShowAllDaysChange}>
+                                <input
+                                    type="checkbox"
+                                    checked={showAllDays}
+                                    onChange={handleShowAllDaysChange}
+                                    className={styles.home__showAllDaysInput}
+                                />
+
+                                {showAllDays ? (
+                                    <img
+                                        src={'/svg/checkmark.svg'}
+                                        alt={'checkmark'}
+                                        className={styles.home__showAllDaysIcon}
+                                    />
+                                ) : (
+                                    <img
+                                        src={'/svg/cross.svg'}
+                                        alt={'cross'}
+                                        className={styles.home__showAllDaysIcon}
+                                    />
+                                )}
+
+                                <span>
+                                    Показывать всю неделю
+                                </span>
+                            </div>
+                        </div>
+                    )}
                     <CustomDatePicker selectedDate={selectedDate} onChange={handleDateChange}/>
-
-                    <div className={styles.home__showAllDays} onClick={handleShowAllDaysChange}>
-                        <input
-                            type="checkbox"
-                            checked={showAllDays}
-                            onChange={handleShowAllDaysChange}
-                            className={styles.home__showAllDaysInput}
-                        />
-
-                        {showAllDays ? (
-                            <img
-                                src={'/svg/checkmark.svg'}
-                                alt={'checkmark'}
-                                className={styles.home__showAllDaysIcon}
-                            />
-                        ) : (
-                            <img
-                                src={'/svg/cross.svg'}
-                                alt={'cross'}
-                                className={styles.home__showAllDaysIcon}
-                            />
-                        )}
-
-                        <span>
-                            Показывать всю неделю
-                        </span>
+                </div>
+            ) : (
+                <>
+                    <div className={styles.home__filterButtons}>
+                        {filters.map((filter, i) => (
+                            <button
+                                key={i}
+                                className={`${styles.home__filterButton} ${getButtonClassName(i)}`}
+                                onClick={() => handleButtonClick(i)}
+                            >
+                                {filter.text}
+                            </button>
+                        ))}
                     </div>
+                    {scheduleData &&
+                        <>
+                            <CustomDatePicker selectedDate={selectedDate} onChange={handleDateChange}/>
+
+                            <div className={styles.home__showAllDays} onClick={handleShowAllDaysChange}>
+                                <input
+                                    type="checkbox"
+                                    checked={showAllDays}
+                                    onChange={handleShowAllDaysChange}
+                                    className={styles.home__showAllDaysInput}
+                                />
+
+                                {showAllDays ? (
+                                    <img
+                                        src={'/svg/checkmark.svg'}
+                                        alt={'checkmark'}
+                                        className={styles.home__showAllDaysIcon}
+                                    />
+                                ) : (
+                                    <img
+                                        src={'/svg/cross.svg'}
+                                        alt={'cross'}
+                                        className={styles.home__showAllDaysIcon}
+                                    />
+                                )}
+
+                                <span>
+                                    Показывать всю неделю
+                                </span>
+                            </div>
+                        </>
+                    }
                 </>
-            }
+            )}
 
             <div className={styles.home__content}>
                 {scheduleData ? (
