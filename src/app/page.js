@@ -1,6 +1,6 @@
 'use client';
 
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './page.module.scss';
 import Day from "./components/Day/Day";
 import CustomDatePicker from './components/DatePicker/DatePicker';
@@ -165,12 +165,28 @@ export default function Home() {
                 <>
                     <CustomDatePicker selectedDate={selectedDate} onChange={handleDateChange}/>
 
-                    <div className={styles.home__showAllDays}>
+                    <div className={styles.home__showAllDays} onClick={handleShowAllDaysChange}>
                         <input
                             type="checkbox"
                             checked={showAllDays}
                             onChange={handleShowAllDaysChange}
+                            className={styles.home__showAllDaysInput}
                         />
+
+                        {showAllDays ? (
+                            <img
+                                src={'/svg/checkmark.svg'}
+                                alt={'arrow'}
+                                className={styles.home__showAllDaysIcon}
+                            />
+                        ) : (
+                            <img
+                                src={'/svg/cross.svg'}
+                                alt={'arrow'}
+                                className={styles.home__showAllDaysIcon}
+                            />
+                        )}
+
                         <span>
                             Показывать всю неделю
                         </span>

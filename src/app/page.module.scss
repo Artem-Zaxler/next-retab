@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 40px;
+  gap: 30px;
   text-align: center;
   transition: 0.5s ease;
 
@@ -96,8 +96,19 @@
     border-radius: 20px;
     background: rgba(26, 102, 224, 0.95);
     border: solid white 0.5px;
-    padding: 15px;
+    padding: 10px 15px;
     cursor: pointer;
+    position: relative;
+    user-select: none;
+  }
+
+  &__showAllDaysInput {
+    display: none;
+  }
+
+  &__showAllDaysIcon {
+    max-width: 16px !important;
+    max-height: 16px !important;
   }
 }
 
