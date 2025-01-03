@@ -1,14 +1,14 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './page.module.scss';
 import CustomDatePicker from './components/DatePicker/DatePicker';
-import { generateSchedule } from '../utils/scheduleGenerator';
+import {generateSchedule} from '../utils/scheduleGenerator';
 import useMedia from "../hooks/useMedia";
 import FilterButtons from './components/FilterButtons/FilterButtons';
 import SubFilters from './components/SubFilters/SubFilters';
 import Schedule from './components/Schedule/Schedule';
-import { generateSubFilters } from '../utils/subFilterGenerator'; // Import the new module
+import {generateSubFilters} from '../utils/subFilterGenerator'; // Import the new module
 
 const backgrounds = [
     '/images/stage-backgrounds/groups-2.png',
@@ -18,10 +18,10 @@ const backgrounds = [
 ];
 
 const filters = [
-    { text: 'По группам', content: 'Расписание для групп', category: 'groups' },
-    { text: 'По преподавателям', content: 'Расписание для преподавателей', category: 'teachers' },
-    { text: 'По кабинетам', content: 'Расписание по кабинетам', category: 'rooms' },
-    { text: 'По предмету', content: 'Расписание по предмету', category: 'subjects' },
+    {text: 'По группам', content: 'Расписание для групп', category: 'groups'},
+    {text: 'По преподавателям', content: 'Расписание для преподавателей', category: 'teachers'},
+    {text: 'По кабинетам', content: 'Расписание по кабинетам', category: 'rooms'},
+    {text: 'По предмету', content: 'Расписание по предмету', category: 'subjects'},
 ];
 
 const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -42,7 +42,7 @@ const Home = () => {
     const [showSettings, setShowSettings] = useState(false);
     const [subFilters, setSubFilters] = useState([]); // State to hold dynamically generated sub-filters
 
-    const { isMobile } = useMedia();
+    const {isMobile} = useMedia();
 
     const [pagePaddingTop, setPagePaddingTop] = useState(isMobile ? 15 : 150);
 
@@ -97,7 +97,7 @@ const Home = () => {
         startOfWeek.setDate(today.getDate() - dayOfWeek + 1);
         const endOfWeek = new Date(startOfWeek);
         endOfWeek.setDate(startOfWeek.getDate() + 6);
-        setCurrentWeek({ start: startOfWeek, end: endOfWeek });
+        setCurrentWeek({start: startOfWeek, end: endOfWeek});
     }, []);
 
     useEffect(() => {
@@ -152,7 +152,7 @@ const Home = () => {
             setExpandStates(newExpandStates);
 
             setTimeout(() => {
-                setCurrentWeek({ start: newStartOfWeek, end: newEndOfWeek });
+                setCurrentWeek({start: newStartOfWeek, end: newEndOfWeek});
                 const newScheduleData = generateSchedule(date, selectedFilter, selectedSubFilter);
                 setScheduleData(newScheduleData);
 
@@ -177,7 +177,7 @@ const Home = () => {
     }
 
     return (
-        <div className={styles.home} style={{ paddingTop: `${pagePaddingTop}px` }}>
+        <div className={styles.home} style={{paddingTop: `${pagePaddingTop}px`}}>
             <img
                 src={backgrounds[index]}
                 alt={'background-image'}
@@ -239,7 +239,7 @@ const Home = () => {
                             </div>
                         </div>
                     )}
-                    <CustomDatePicker selectedDate={selectedDate} onChange={handleDateChange} />
+                    <CustomDatePicker selectedDate={selectedDate} onChange={handleDateChange}/>
                 </div>
             ) : (
                 <>
@@ -249,47 +249,50 @@ const Home = () => {
                         handleButtonClick={handleButtonClick}
                         isAnimating={isAnimating}
                     />
-                    {selectedFilter !== null && (
-                        <SubFilters
-                            filters={filters}
-                            selectedFilter={selectedFilter}
-                            selectedSubFilter={selectedSubFilter}
-                            handleSubFilterClick={handleSubFilterClick}
-                            subFilters={subFilters} // Pass the dynamically generated sub-filters
-                        />
-                    )}
-                    {scheduleData &&
-                        <>
-                            <CustomDatePicker selectedDate={selectedDate} onChange={handleDateChange} />
+                    <div className={styles.home__desktopFilters}>
+                        {selectedFilter !== null && (
+                            <SubFilters
+                                filters={filters}
+                                selectedFilter={selectedFilter}
+                                selectedSubFilter={selectedSubFilter}
+                                handleSubFilterClick={handleSubFilterClick}
+                                subFilters={subFilters}
+                            />
+                        )}
+                        {scheduleData &&
+                            <>
+                                <CustomDatePicker selectedDate={selectedDate} onChange={handleDateChange}/>
 
-                            <div className={styles.home__showAllDays} onClick={handleShowAllDaysChange}>
-                                <input
-                                    type="checkbox"
-                                    checked={showAllDays}
-                                    onChange={handleShowAllDaysChange}
-                                    className={styles.home__showAllDaysInput}
-                                />
-
-                                {showAllDays ? (
-                                    <img
-                                        src={'/svg/checkmark.svg'}
-                                        alt={'checkmark'}
-                                        className={styles.home__showAllDaysIcon}
+                                <div className={styles.home__showAllDays} onClick={handleShowAllDaysChange}>
+                                    <input
+                                        type="checkbox"
+                                        checked={showAllDays}
+                                        onChange={handleShowAllDaysChange}
+                                        className={styles.home__showAllDaysInput}
                                     />
-                                ) : (
-                                    <img
-                                        src={'/svg/cross.svg'}
-                                        alt={'cross'}
-                                        className={styles.home__showAllDaysIcon}
-                                    />
-                                )}
 
-                                <span>
+                                    {showAllDays ? (
+                                        <img
+                                            src={'/svg/checkmark.svg'}
+                                            alt={'checkmark'}
+                                            className={styles.home__showAllDaysIcon}
+                                        />
+                                    ) : (
+                                        <img
+                                            src={'/svg/cross.svg'}
+                                            alt={'cross'}
+                                            className={styles.home__showAllDaysIcon}
+                                        />
+                                    )}
+
+                                    <span>
                                     Показывать всю неделю
                                 </span>
-                            </div>
-                        </>
-                    }
+                                </div>
+                            </>
+
+                        }
+                    </div>
                 </>
             )}
 

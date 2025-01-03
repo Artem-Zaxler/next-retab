@@ -100,6 +100,11 @@
       text-shadow: 2px 2px 4px black;
     }
   }
+
+  &__desktopFilters {
+    display: flex;
+    gap: 16px;
+  }
 }
 
 @keyframes loading {
