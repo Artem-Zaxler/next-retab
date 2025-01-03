@@ -31,6 +31,7 @@ export default function Home() {
     const [currentDay, setCurrentDay] = useState(null);
     const [currentWeek, setCurrentWeek] = useState(null);
     const [showAllDays, setShowAllDays] = useState(false);
+    const [isCurrentDay, setIsCurrentDay] = useState(false);
 
     useEffect(() => {
         const savedFilter = localStorage.getItem('selectedScheduleFilter');
@@ -133,7 +134,9 @@ export default function Home() {
         localStorage.setItem('showAllDays', String(newShowAllDays));
     };
 
-    const isCurrentDay = selectedDate >= currentWeek.start && selectedDate <= currentWeek.end;
+    function getIsCurrentDay() {
+        return selectedDate >= currentWeek.start && selectedDate <= currentWeek.end;
+    }
 
     return (
         <div className={styles.home} style={{paddingTop: `${pagePaddingTop}px`}}>
@@ -195,36 +198,36 @@ export default function Home() {
                         <div className={styles.home__column}>
                             <Day day="Monday"
                                  subjects={scheduleData.Monday}
-                                 isCurrentDay={currentDay === 'Monday' && isCurrentDay}
+                                 isCurrentDay={currentDay === 'Monday' && getIsCurrentDay()}
                                  showAllDays={showAllDays}
                             />
                             <Day day="Thursday"
                                  subjects={scheduleData.Thursday}
-                                 isCurrentDay={currentDay === 'Thursday' && isCurrentDay}
+                                 isCurrentDay={currentDay === 'Thursday' && getIsCurrentDay()}
                                  showAllDays={showAllDays}
                             />
                         </div>
                         <div className={styles.home__column}>
                             <Day day="Tuesday"
                                  subjects={scheduleData.Tuesday}
-                                 isCurrentDay={currentDay === 'Tuesday' && isCurrentDay}
+                                 isCurrentDay={currentDay === 'Tuesday' && getIsCurrentDay()}
                                  showAllDays={showAllDays}
                             />
                             <Day day="Friday"
                                  subjects={scheduleData.Friday}
-                                 isCurrentDay={currentDay === 'Friday' && isCurrentDay}
+                                 isCurrentDay={currentDay === 'Friday' && getIsCurrentDay()}
                                  showAllDays={showAllDays}
                             />
                         </div>
                         <div className={styles.home__column}>
                             <Day day="Wednesday"
                                  subjects={scheduleData.Wednesday}
-                                 isCurrentDay={currentDay === 'Wednesday' && isCurrentDay}
+                                 isCurrentDay={currentDay === 'Wednesday' && getIsCurrentDay()}
                                  showAllDays={showAllDays}
                             />
                             <Day day="Saturday"
                                  subjects={scheduleData.Saturday}
-                                 isCurrentDay={currentDay === 'Saturday' && isCurrentDay}
+                                 isCurrentDay={currentDay === 'Saturday' && getIsCurrentDay()}
                                  showAllDays={showAllDays}
                             />
                         </div>
