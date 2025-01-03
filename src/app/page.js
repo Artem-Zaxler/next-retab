@@ -15,10 +15,10 @@ const backgrounds = [
 ];
 
 const filters = [
-    {text: 'По группам', content: 'Расписание для групп'},
-    {text: 'По преподавателям', content: 'Расписание для преподавателей'},
-    {text: 'По кабинетам', content: 'Расписание по кабинетам'},
-    {text: 'По предмету', content: 'Расписание по предмету'},
+    {text: 'По группам', content: 'Расписание для групп', subFilters: ['ТРП-2-21', 'ПЭ-1-20']},
+    {text: 'По преподавателям', content: 'Расписание для преподавателей', subFilters: ['Иванов И. И.', 'Петров П. П.']},
+    {text: 'По кабинетам', content: 'Расписание по кабинетам', subFilters: ['В-113', 'Г-214']},
+    {text: 'По предмету', content: 'Расписание по предмету', subFilters: ['Java-технологии', 'Программные методы обработки изображений и распознавания образов']},
 ];
 
 const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -27,6 +27,7 @@ const Home = () => {
     const [index, setIndex] = useState(0);
     const [activeStage, setActiveStage] = useState(0);
     const [selectedFilter, setSelectedFilter] = useState(null);
+    const [selectedSubFilter, setSelectedSubFilter] = useState(null);
     const [scheduleData, setScheduleData] = useState(null);
     const [isAnimating, setIsAnimating] = useState(true);
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -69,26 +70,15 @@ const Home = () => {
 
     useEffect(() => {
         const loadScheduleData = async () => {
-            switch (selectedFilter) {
-                case 0:
-                    setScheduleData(generateSchedule(selectedDate));
-                    break;
-                case 1:
-                    setScheduleData(generateSchedule(selectedDate));
-                    break;
-                case 2:
-                    setScheduleData(generateSchedule(selectedDate));
-                    break;
-                case 3:
-                    setScheduleData(generateSchedule(selectedDate));
-                    break;
-                default:
-                    setScheduleData(null);
+            if (selectedFilter !== null && selectedSubFilter !== null) {
+                setScheduleData(generateSchedule(selectedDate, selectedFilter, selectedSubFilter));
+            } else {
+                setScheduleData(null);
             }
         };
 
         loadScheduleData();
-    }, [selectedFilter]);
+    }, [selectedFilter, selectedSubFilter, selectedDate]);
 
     useEffect(() => {
         const today = new Date();
@@ -106,8 +96,13 @@ const Home = () => {
         setActiveStage(stageIndex);
         setIndex(stageIndex);
         setSelectedFilter(stageIndex);
+        setSelectedSubFilter(null);
         setIsAnimating(false);
         localStorage.setItem('selectedScheduleFilter', stageIndex);
+    };
+
+    const handleSubFilterClick = (subFilter) => {
+        setSelectedSubFilter(subFilter);
     };
 
     const getButtonClassName = (i) => {
@@ -147,7 +142,7 @@ const Home = () => {
 
             setTimeout(() => {
                 setCurrentWeek({start: newStartOfWeek, end: newEndOfWeek});
-                const newScheduleData = generateSchedule(date);
+                const newScheduleData = generateSchedule(date, selectedFilter, selectedSubFilter);
                 setScheduleData(newScheduleData);
 
                 setTimeout(() => {
@@ -201,6 +196,19 @@ const Home = () => {
                                     </button>
                                 ))}
                             </div>
+                            {selectedFilter !== null && (
+                                <div className={styles.home__subFilters}>
+                                    {filters[selectedFilter].subFilters.map((subFilter, j) => (
+                                        <button
+                                            key={j}
+                                            className={`${styles.home__subFilterButton} ${selectedSubFilter === subFilter ? styles.home__subFilterButton_active : styles.home__subFilterButton_inactive}`}
+                                            onClick={() => handleSubFilterClick(subFilter)}
+                                        >
+                                            {subFilter}
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
                             <div className={styles.home__showAllDays} onClick={handleShowAllDaysChange}>
                                 <input
                                     type="checkbox"
@@ -244,6 +252,19 @@ const Home = () => {
                             </button>
                         ))}
                     </div>
+                    {selectedFilter !== null && (
+                        <div className={styles.home__subFilters}>
+                            {filters[selectedFilter].subFilters.map((subFilter, j) => (
+                                <button
+                                    key={j}
+                                    className={`${styles.home__subFilterButton} ${selectedSubFilter === subFilter ? styles.home__subFilterButton_active : styles.home__subFilterButton_inactive}`}
+                                    onClick={() => handleSubFilterClick(subFilter)}
+                                >
+                                    {subFilter}
+                                </button>
+                            ))}
+                        </div>
+                    )}
                     {scheduleData &&
                         <>
                             <CustomDatePicker selectedDate={selectedDate} onChange={handleDateChange}/>
