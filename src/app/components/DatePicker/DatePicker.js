@@ -8,11 +8,17 @@ const CustomDatePicker = ({ selectedDate, onChange }) => {
     const datePickerRef = useRef(null);
 
     useEffect(() => {
-        if (datePickerRef.current) {
-            datePickerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            setTimeout(() => {
-                window.scrollBy(0, -80);
-            }, 1);
+        const element = datePickerRef.current;
+        if (element) {
+            const rect = element.getBoundingClientRect();
+            const isInView = (rect.top >= 0 && rect.bottom <= window.innerHeight);
+
+            if (!isInView) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                setTimeout(() => {
+                    window.scrollBy(0, -80);
+                }, 0);
+            }
         }
     }, [selectedDate]);
 
