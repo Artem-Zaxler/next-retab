@@ -8,4 +8,6 @@
   text-align: center;
   outline: none;
   cursor: pointer;
+  -webkit-user-select: none !important;
+  user-select: none !important;
 }

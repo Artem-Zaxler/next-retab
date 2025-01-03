@@ -3,6 +3,15 @@
   flex-direction: column;
   gap: 15px;
   align-items: start;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.25), transparent);
+  padding: 10px;
+  border-radius: 10px;
+
+  &_today {
+    background: linear-gradient(to right, rgba(26, 102, 224, 0.95), rgba(94, 141, 222, 0.95));
+    color: white
+  }
+
 
   &__title {
     font-size: 18px;

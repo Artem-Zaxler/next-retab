@@ -68,6 +68,7 @@ export default function Day({day, subjects, isCurrentDay, showAllDays}) {
                                     subject={item.subject}
                                     cabinet={item.cabinet}
                                     teacher={item.teacher}
+                                    isToday={isCurrentDay}
                                 />
                             ))) : (
                             <span>Отдыхаем сегодня</span>

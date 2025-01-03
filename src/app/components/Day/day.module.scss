@@ -40,7 +40,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding: 10px 40px 40px;
+    padding: 10px 20px 20px;
   }
 
   &_current {
@@ -53,6 +53,10 @@
 
     & > div > .day__arrow {
       filter: invert(1);
+    }
+
+    & > .day__contentLine {
+      background: linear-gradient(to left, transparent, rgba(26, 102, 224, 0.95), rgba(26, 102, 224, 0.95), transparent);
     }
   }
 }
